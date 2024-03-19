@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "background-primary-hex": "var(--background-primary-hex)",
+        "background-secondary-hex": "var(--background-secondary-hex)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
