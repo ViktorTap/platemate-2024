@@ -5,12 +5,30 @@
 :root {
   --background-primary-hex: #d3efbf;
   --background-secondary-hex: #A5DD9B;
+
+  --button-primary-hex: #BDE3FF;
+  --button-hover-hex: #7DC9FF;
+  --button-active-hex: #3EAFFF;
 }
 
 body {
   background-color: var(--background-primary-hex);
-  max-width: 960px;
+  max-width: 1024px;
   margin-inline: auto;
+  padding: 0.75rem;
+}
+
+/* BUTTON */
+button {
+  padding: 0.75rem;
+  background-color: var(--button-primary-hex);
+  border-radius: 0.5rem;
+}
+button:hover {
+  background-color: var(--button-hover-hex);
+}
+button:active {
+  background-color: var(--button-active-hex);
 }
 
 
