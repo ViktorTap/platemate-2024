@@ -38,6 +38,30 @@ button:active {
   background-color: var(--button-active-hex);
 }
 
+/* INPUT & LABEL */
+
+input {
+  background-color: var(--background-secondary-hex);
+  border-radius: 0.75rem;
+  border: 1px solid #032137;
+  box-sizing: border-box;
+  color: #032137;
+  font-size: 1rem;
+
+  /* height: 100%; */ 
+
+  outline: 0;
+  padding: 0.25rem 0.75rem;
+
+  width: 75%;
+
+  margin-bottom: 1rem;
+}
+
+/* label {
+  margin: 0.75rem;
+} */
+
 
 
 
