@@ -28,7 +28,9 @@ export default function RegistrationForm() {
       phone: "",
       email: "",
     },
+
     validationSchema,
+
     onSubmit: (values) => {
       console.log("Form submitted:", values);
     },
@@ -39,36 +41,37 @@ export default function RegistrationForm() {
       {/*FIRST NAME*/}
 
       <div>
-        {/* <label htmlFor="firstName">Name</label> */}
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          placeholder="Name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-        />
+        <div className="form-input-container">
+          <input
+            id="firstName"
+            name="firstName"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.firstName}
+          />
+          <label htmlFor="firstName">Name</label>
+        </div>
+
         {formik.touched.firstName && formik.errors.firstName ? (
-          <div className="error">{formik.errors.firstName}</div>
+          <span className="error">{formik.errors.firstName}</span>
         ) : null}
       </div>
 
       {/*LAST NAME*/}
 
       <div>
-        {/* <label htmlFor="lastName">Last name</label> */}
+        <label htmlFor="lastName">Last name</label>
         <input
           id="lastName"
           name="lastName"
           type="text"
-          placeholder="Surname"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.lastName}
         />
         {formik.touched.lastName && formik.errors.lastName ? (
-          <div className="error">{formik.errors.lastName}</div>
+          <span className="error">{formik.errors.lastName}</span>
         ) : null}
       </div>
 
@@ -86,7 +89,7 @@ export default function RegistrationForm() {
           value={formik.values.address}
         />
         {formik.touched.address && formik.errors.address ? (
-          <div className="error">{formik.errors.address}</div>
+          <span className="error">{formik.errors.address}</span>
         ) : null}
       </div>
 
@@ -104,7 +107,7 @@ export default function RegistrationForm() {
           value={formik.values.phone}
         />
         {formik.touched.phone && formik.errors.phone ? (
-          <div className="error">{formik.errors.phone}</div>
+          <span className="error">{formik.errors.phone}</span>
         ) : null}
       </div>
 
@@ -122,7 +125,7 @@ export default function RegistrationForm() {
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email ? (
-          <div className="error">{formik.errors.email}</div>
+          <span className="error">{formik.errors.email}</span>
         ) : null}
       </div>
       <button type="submit" disabled={!formik.isValid}>
