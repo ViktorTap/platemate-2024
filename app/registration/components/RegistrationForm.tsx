@@ -1,136 +1,98 @@
 "use client";
 
-import * as yup from "yup";
-import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Formik, Form, useField } from "formik";
+
+interface CustomTextInputTypes {
+  name: string;
+  id?: string;
+  label: string;
+  type: string;
+}
+
+const CustomTextInput: React.FC<CustomTextInputTypes> = ({
+  label,
+  ...props
+}) => {
+  const [field, meta] = useField(props);
+
+  return (
+    <div className="input-box">
+      <input
+        className="text-input"
+        id={meta.touched && meta.error ? "text-input-error" : ""}
+        {...field}
+        {...props}
+      />
+      <label htmlFor={props.id || props.name}>{label}</label>
+      {meta.touched && meta.error && (
+        <span className="input-error-message">{meta.error}</span>
+      )}
+    </div>
+  );
+};
 
 export default function RegistrationForm() {
   interface FormValues {
     firstName: string;
     lastName: string;
-    address: string;
+    address: object;
     phone: string;
     email: string;
   }
 
-  const validationSchema = yup.object({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
-    address: yup.string(),
-    phone: yup.string(),
-    email: yup.string().email().required("Email is required"),
-  });
-
-  const formik = useFormik<FormValues>({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      address: "",
-      phone: "",
-      email: "",
-    },
-
-    validationSchema,
-
-    onSubmit: (values) => {
-      console.log("Form submitted:", values);
-    },
-  });
-
   return (
-    <form onSubmit={formik.handleSubmit}>
-      {/*FIRST NAME*/}
+    <>
+      <Formik<FormValues>
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          address: { street: "", postalCode: "", city: "" },
+          phone: "",
+          email: "",
+        }}
+        validationSchema={Yup.object({
+          firstName: Yup.string()
+            .max(15, "Must be 15 characters or less")
+            .required("First name is required"),
+          lastName: Yup.string()
+            .max(20, "Must be 20 characters or less")
+            .required("Last name is required"),
 
-      <div>
-        <div className="form-input-container">
-          <input
-            id="firstName"
-            name="firstName"
+          address: Yup.object().shape({
+            street: Yup.string(),
+            postalCode: Yup.string().max(10, "Must be 10 characters or less"),
+            city: Yup.string(),
+          }),
+
+          phone: Yup.string().max(15, "Must be 15 characters or less"),
+          email: Yup.string()
+            .email("Invalid email address")
+            .required("Email is required"),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <Form className="form-container">
+          <CustomTextInput label="First Name" name="firstName" type="text" />
+          <CustomTextInput label="Last Name" name="lastName" type="text" />
+          <CustomTextInput label="Street" name="address.street" type="text" />
+          <CustomTextInput
+            label="Postal Code"
+            name="address.postalCode"
             type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.firstName}
           />
-          <label htmlFor="firstName">Name</label>
-        </div>
+          <CustomTextInput label="City" name="address.city" type="text" />
+          <CustomTextInput label="Phone" name="phone" type="text" />
+          <CustomTextInput label="Email" name="email" type="email" />
 
-        {formik.touched.firstName && formik.errors.firstName ? (
-          <span className="error">{formik.errors.firstName}</span>
-        ) : null}
-      </div>
-
-      {/*LAST NAME*/}
-
-      <div>
-        <label htmlFor="lastName">Last name</label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
-        />
-        {formik.touched.lastName && formik.errors.lastName ? (
-          <span className="error">{formik.errors.lastName}</span>
-        ) : null}
-      </div>
-
-      {/*ADDRESS*/}
-
-      <div>
-        {/* <label htmlFor="address">Address</label> */}
-        <input
-          id="address"
-          name="address"
-          type="text"
-          placeholder="Address"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.address}
-        />
-        {formik.touched.address && formik.errors.address ? (
-          <span className="error">{formik.errors.address}</span>
-        ) : null}
-      </div>
-
-      {/*PHONE*/}
-
-      <div>
-        {/* <label htmlFor="phone">Phone</label> */}
-        <input
-          id="phone"
-          name="phone"
-          type="text"
-          placeholder="Phone"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.phone}
-        />
-        {formik.touched.phone && formik.errors.phone ? (
-          <span className="error">{formik.errors.phone}</span>
-        ) : null}
-      </div>
-
-      {/*EMAIL*/}
-
-      <div>
-        {/* <label htmlFor="email">Email</label> */}
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <span className="error">{formik.errors.email}</span>
-        ) : null}
-      </div>
-      <button type="submit" disabled={!formik.isValid}>
-        Submit
-      </button>
-    </form>
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
+    </>
   );
 }
