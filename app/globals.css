@@ -38,34 +38,38 @@ button:active {
   background-color: var(--button-active-hex);
 }
 
-/* INPUT & LABEL */
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+/* FORM & INPUT & LABEL */
 
 .form-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .input-box {
   position: relative; 
+  height: 78px;
+  width: 100%;
 }
 
 .text-input {
-  /* background-color: var(--background-secondary-hex); */
   background: transparent;
   border-radius: 0.75rem;
   border: 1px solid #032137;
   box-sizing: border-box;
   color: #032137;
   font-size: 1rem;
-  
   padding: 0.75rem 0.75rem;
-
   outline: none;
   margin-bottom: 1.5rem;
   transition: 0.2s;
   cursor: text;
-
-  /* z-index: 1111; */
+  width: 100%;
 }
 
 #text-input-error {
@@ -78,7 +82,7 @@ button:active {
   margin-bottom: 1.5rem;
   padding: 0.75rem 0.75rem;
   outline: none;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.75rem;
   transition: 0.2s;
   cursor: text;
 }
@@ -100,7 +104,6 @@ input:focus + label, input:not([value=""]) + label
   padding: 0 0.75rem;
   background-color: var(--background-primary-hex);
   transform: translate(15px, -9px);
-  letter-spacing: 0.15rem;
   
 } 
 
@@ -117,18 +120,17 @@ input:focus, input:not([value=""]) {
   padding: 0 0.75rem;
   background-color: var(--background-primary-hex);
   transform: translate(15px, -9px);
-  letter-spacing: 0.15rem; 
-  /* margin-bottom: 1.5rem; */
+ 
 }
 
 .input-error-message {
+  position: absolute;
   border: 1px solid red;
   background-color: var(--background-primary-hex);
   border-radius: 0.75rem;
   font-size: 0.75rem;
-  position: absolute;
-  left: 85px;
-  bottom: 3px;
+  left: 100px;
+  bottom: 19px;
   padding: 0 0.75rem;
   pointer-events: none;
   transition: 0.2s;
