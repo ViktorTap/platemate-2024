@@ -51,6 +51,7 @@ export default function RegistrationForm() {
           phone: "",
           email: "",
         }}
+        validateOnMount
         validationSchema={Yup.object({
           firstName: Yup.string()
             .max(15, "Must be 15 characters or less")
@@ -77,21 +78,40 @@ export default function RegistrationForm() {
           }, 400);
         }}
       >
-        <Form className="form-container">
-          <CustomTextInput label="First Name" name="firstName" type="text" />
-          <CustomTextInput label="Last Name" name="lastName" type="text" />
-          <CustomTextInput label="Street" name="address.street" type="text" />
-          <CustomTextInput
-            label="Postal Code"
-            name="address.postalCode"
-            type="text"
-          />
-          <CustomTextInput label="City" name="address.city" type="text" />
-          <CustomTextInput label="Phone" name="phone" type="text" />
-          <CustomTextInput label="Email" name="email" type="email" />
+        {(formik) => {
+          console.log("Formik logs", formik);
+          return (
+            <Form className="form-container">
+              <CustomTextInput
+                label="First Name"
+                name="firstName"
+                type="text"
+              />
+              <CustomTextInput label="Last Name" name="lastName" type="text" />
+              <CustomTextInput
+                label="Street"
+                name="address.street"
+                type="text"
+              />
+              <CustomTextInput
+                label="Postal Code"
+                name="address.postalCode"
+                type="text"
+              />
+              <CustomTextInput label="City" name="address.city" type="text" />
+              <CustomTextInput label="Phone" name="phone" type="text" />
+              <CustomTextInput label="Email" name="email" type="email" />
 
-          <button type="submit">Submit</button>
-        </Form>
+              <button
+                className="submit-button"
+                type="submit"
+                disabled={!formik.isValid || formik.isSubmitting}
+              >
+                Register Me
+              </button>
+            </Form>
+          );
+        }}
       </Formik>
     </>
   );

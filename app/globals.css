@@ -43,6 +43,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.submit-button {
+  background-color: var(--button-primary-hex);
+  width: 50%;
+}
+
 /* FORM & INPUT & LABEL */
 
 .form-container {
