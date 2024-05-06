@@ -3,6 +3,8 @@
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 
+import { prepareAndSendValuesForDB } from "@/app/actions/registration";
+
 interface CustomTextInputTypes {
   name: string;
   id?: string;
@@ -39,7 +41,13 @@ export default function RegistrationForm() {
     address: object;
     phone: string;
     email: string;
+    password: string;
+    confirmPassword: string;
   }
+
+  const getCharacterValidationError = (str: string) => {
+    return `Your password must have at least 1 ${str} character`;
+  };
 
   return (
     <>
@@ -50,6 +58,8 @@ export default function RegistrationForm() {
           address: { street: "", postalCode: "", city: "" },
           phone: "",
           email: "",
+          password: "",
+          confirmPassword: "",
         }}
         validateOnMount
         validationSchema={Yup.object({
@@ -70,16 +80,26 @@ export default function RegistrationForm() {
           email: Yup.string()
             .email("Invalid email address")
             .required("Email is required"),
+          password: Yup.string()
+            .required("Please enter a password")
+            .min(8, "Password must have at least 8 characters")
+            .matches(/[0-9]/, getCharacterValidationError("digit"))
+            .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+            .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
+
+          confirmPassword: Yup.string()
+            .required("Please re-type your password")
+            .oneOf([Yup.ref("password")], "Passwords does not match"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
+            prepareAndSendValuesForDB(values);
             setSubmitting(false);
           }, 400);
         }}
       >
         {(formik) => {
-          console.log("Formik logs", formik);
           return (
             <Form className="form-container">
               <CustomTextInput
@@ -101,6 +121,16 @@ export default function RegistrationForm() {
               <CustomTextInput label="City" name="address.city" type="text" />
               <CustomTextInput label="Phone" name="phone" type="text" />
               <CustomTextInput label="Email" name="email" type="email" />
+              <CustomTextInput
+                label="Password"
+                name="password"
+                type="password"
+              />
+              <CustomTextInput
+                label="Confirm Password"
+                name="confirmPassword"
+                type="password"
+              />
 
               <button
                 className="submit-button"
