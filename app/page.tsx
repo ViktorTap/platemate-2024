@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import { connectDB } from "./data/dbConnector";
+
 export default function Home() {
   return (
     <main>
