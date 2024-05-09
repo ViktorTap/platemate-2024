@@ -1,9 +1,9 @@
 "use server";
-import { NextApiRequest, NextApiResponse } from "next";
 
 import bcrypt from "bcrypt";
 import { connectDB } from "../data/dbConnector";
-import User from "../data/model/user";
+
+import User from "../data/model/user.model";
 
 interface Values {
   firstName: string;
@@ -13,30 +13,32 @@ interface Values {
   email: string;
   password: string;
   confirmPassword: string;
-  securedPassword: string;
 }
 
-export const securePassword = async (values: Values) => {
-  const hashedPassword = await bcrypt.hash(values.password, 10);
-  values.securedPassword = hashedPassword;
-};
+interface ReturnMessage {
+  message: string;
+  success: boolean;
+}
 
-export const prepareAndSendValuesForDB = async (
-  values: Values,
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  await connectDB();
-
+export const registerUser = async (
+  values: Values
+): Promise<typeof User | ReturnMessage> => {
   try {
+    connectDB();
+
     const existingEmail = await User.findOne({ email: values.email });
+
     if (existingEmail) {
-      return res.status(400).json({ message: "Email is already in use" });
+      console.log("SERVER SIDE Email is already registered");
+      return {
+        message: "SERVER SIDE Email is already registered",
+        success: false,
+      };
     }
 
     const hashedPassword = await bcrypt.hash(values.password, 10);
 
-    const newUser = await User.create({
+    const newUser = new User({
       firstName: values.firstName,
       lastName: values.lastName,
       address: values.address,
@@ -45,9 +47,58 @@ export const prepareAndSendValuesForDB = async (
       password: hashedPassword,
     });
 
-    res.status(201).json({ message: "User registered successfully" });
+    await newUser.save();
+
+    console.log(newUser);
+
+    return {
+      message: `New user - ${newUser.firstName} is created successfully.`,
+      success: true,
+    };
   } catch (error) {
-    console.error("Error registering user:", error);
-    res.status(500).json({ message: "Error creating user" });
+    console.error("Error server side registration:", error);
+    return {
+      message: `Error on server-side`,
+      success: false,
+    };
   }
 };
+
+// export const registrationHandler = async (
+//   req: NextApiRequest,
+//   res: NextApiResponse
+// ) => {
+//   const {
+//     firstName,
+//     lastName,
+//     address,
+//     phone,
+//     email,
+//     password,
+//     confirmPassword,
+//   } = req.body;
+
+//   try {
+//     const newUser = await registerUser({
+//       firstName,
+//       lastName,
+//       address,
+//       phone,
+//       email,
+//       password,
+//       confirmPassword,
+//     });
+
+//     if (newUser) {
+//       res.status(201).json({
+//         message: " registrationHandler - User registered successfully",
+//       });
+//     } else {
+//       res
+//         .status(500)
+//         .json({ message: "registrationHandler - Error creating user" });
+//     }
+//   } catch (error) {
+//     console.error("registrationHandler error:", error);
+//   }
+// };

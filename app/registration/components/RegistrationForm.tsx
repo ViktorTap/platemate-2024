@@ -2,8 +2,7 @@
 
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
-
-import { prepareAndSendValuesForDB } from "@/app/actions/registration";
+import { registerUser } from "@/app/actions/registration";
 
 interface CustomTextInputTypes {
   name: string;
@@ -91,12 +90,34 @@ export default function RegistrationForm() {
             .required("Please re-type your password")
             .oneOf([Yup.ref("password")], "Passwords does not match"),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            prepareAndSendValuesForDB(values);
-            setSubmitting(false);
-          }, 400);
+        onSubmit={async (values, { setSubmitting }) => {
+          // all registration magic
+
+          try {
+            const res = await registerUser(values);
+
+            if (typeof res === "object" && "message" in res) {
+              // Check if it's a ReturnMessage
+              console.log(res.message); // Access message from ReturnMessage
+            } else {
+              // Registration might be successful, but the response is the User model
+              console.log(
+                "Registration might be successful. Check server logs."
+              );
+            }
+          } catch (error) {
+            // Handle registration error
+          }
+
+          // const res = await registerUser(values);
+
+          // if (res.success) {
+          //   console.log(res.message);
+          // }
+
+          // console.log(res);
+
+          setSubmitting(false);
         }}
       >
         {(formik) => {

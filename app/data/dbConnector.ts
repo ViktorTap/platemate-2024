@@ -1,4 +1,6 @@
-import "dotenv/config";
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import mongoose from "mongoose";
 
 const connectionString = `mongodb+srv://restaurant-practice-2024:${process.env.DB_PASSWORD}@platemate.4t1wqio.mongodb.net/platemateData?retryWrites=true&w=majority&appName=platemate`;

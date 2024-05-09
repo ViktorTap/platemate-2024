@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema, model } = mongoose;
+const { Schema, model, models } = mongoose;
 
 interface IUser {
   firstName: string;
@@ -26,6 +26,6 @@ const userSchema = new Schema<IUser>({
   confirmPassword: String,
 });
 
-const User = model("users", userSchema);
+const User = model<IUser>("users", userSchema);
 
 export default User;
