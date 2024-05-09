@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: var(--background-primary-hex);
+  background-color: beige;
   max-width: 1024px;
   margin-inline: auto;
   padding: 0.75rem;
