@@ -123,7 +123,7 @@ input:focus, input:not([value=""]) {
   border-radius: 0.75rem;
   font-size: 0.75rem;
   padding: 0 0.75rem;
-  background-color: var(--background-primary-hex);
+  background-color: beige;
   transform: translate(15px, -9px);
  
 }
@@ -131,7 +131,7 @@ input:focus, input:not([value=""]) {
 .input-error-message {
   position: absolute;
   border: 1px solid red;
-  background-color: var(--background-primary-hex);
+  background-color: beige;
   border-radius: 0.75rem;
   font-size: 0.75rem;
   left: 100px;

@@ -91,31 +91,19 @@ export default function RegistrationForm() {
             .oneOf([Yup.ref("password")], "Passwords does not match"),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          // all registration magic
-
           try {
             const res = await registerUser(values);
 
             if (typeof res === "object" && "message" in res) {
-              // Check if it's a ReturnMessage
-              console.log(res.message); // Access message from ReturnMessage
+              console.log(res.message);
             } else {
-              // Registration might be successful, but the response is the User model
               console.log(
                 "Registration might be successful. Check server logs."
               );
             }
           } catch (error) {
-            // Handle registration error
+            console.error("Error in registration:", error);
           }
-
-          // const res = await registerUser(values);
-
-          // if (res.success) {
-          //   console.log(res.message);
-          // }
-
-          // console.log(res);
 
           setSubmitting(false);
         }}

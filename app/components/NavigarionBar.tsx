@@ -12,7 +12,7 @@ export default function NavigationBar() {
         <button>Restaurants</button>
 
         <button>
-          <Link href="/registration">Registration</Link>
+          <Link href="/account">Log In</Link>
         </button>
       </ul>
     </nav>
