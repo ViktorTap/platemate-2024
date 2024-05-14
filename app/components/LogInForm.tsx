@@ -90,8 +90,11 @@ export default function LogIn() {
               >
                 Log In
               </button>
-              <button className="mt-2 w-1/2">
-                <Link href="/account/registration">I want to register</Link>
+
+              <button className="mt-2 w-3/4">
+                <Link href="/account/registration" className="">
+                  I want to register
+                </Link>
               </button>
             </Form>
           );

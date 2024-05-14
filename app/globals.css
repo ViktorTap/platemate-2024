@@ -45,7 +45,10 @@ button:disabled {
 
 .submit-button {
   background-color: var(--button-primary-hex);
-  width: 50%;
+  width: 75%;
+  white-space: nowrap;
+  flex-basis: 1;
+  
 }
 
 /* FORM & INPUT & LABEL */
