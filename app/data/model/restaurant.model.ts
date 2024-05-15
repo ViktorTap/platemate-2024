@@ -1,16 +1,12 @@
 import mongoose from "mongoose";
 
-const { Schema, model, models } = mongoose;
+const { Schema, model } = mongoose;
 
-interface IDish {
-  name: string;
-  description: string;
-  price: string;
-}
-
-interface IRestaurant {
+export interface IRestaurant {
+  _id: object;
   name: string;
   address: object;
+  description: string;
   phone: string;
   email: string;
   category: string[];
@@ -18,17 +14,20 @@ interface IRestaurant {
 }
 
 const restaurantSchema = new Schema<IRestaurant>({
+  _id: mongoose.Types.ObjectId,
   name: String,
   address: {
     street: String,
     postalCode: String,
     city: String,
   },
+  description: String,
   phone: String,
   email: String,
   category: [String],
   menu: [
     {
+      _id: mongoose.Types.ObjectId,
       dishName: String,
       description: String,
       price: String,

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema, model, models } = mongoose;
+const { Schema, model } = mongoose;
 
 interface IUser {
   firstName: string;
