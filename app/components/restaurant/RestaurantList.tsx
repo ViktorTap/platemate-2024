@@ -11,12 +11,8 @@ export default function RestaurantList() {
   return (
     <div>
       <h2>Hello</h2>
-      {restaurants.map((restaurant) => {
-        return (
-          <div key={restaurant.id}>
-            <RestaurantCard restaurant={restaurant} />
-          </div>
-        );
+      {restaurants.map((restaurant: IRestaurant) => {
+        return <RestaurantCard key={restaurant._id} {...restaurant} />;
       })}
     </div>
   );

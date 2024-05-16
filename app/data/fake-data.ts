@@ -1,6 +1,6 @@
 const restaurants = [
   {
-    id: 1,
+    _id: "1",
     name: "Restix",
     tagline: "Conquer Cravings, Savor Sweets",
     description: "Hearty meals for hankerings and delicious sweet treats",
@@ -14,8 +14,8 @@ const restaurants = [
     category: ["Hangry Helpers", "Sweet Endings"],
     menu: [
       {
-        id: "d1",
-        name: "Breakfast Helper Hero",
+        _id: "d1",
+        dishName: "Breakfast Helper Hero",
         description:
           "Scrambled eggs, bacon, sausage, cheese, hash browns, all wrapped up in a warm flour tortilla. This monster will banish your hanger faster than you can say 'breakfast burrito.'",
         price: 8.99,
@@ -23,8 +23,8 @@ const restaurants = [
         image: "/bur-001.jpeg",
       },
       {
-        id: "d2",
-        name: "Pizza My Heart",
+        _id: "d2",
+        dishName: "Pizza My Heart",
         description:
           "A 16-inch pizza piled high with your choice of toppings. Perfect for when you need a cheesy, saucy intervention for your hanger.  Don't worry, we won't judge.",
         price: 12.49,
@@ -32,8 +32,8 @@ const restaurants = [
         image: "/piz-005.jpeg",
       },
       {
-        id: "d3",
-        name: "Nacho Average Hangry Fix",
+        _id: "d3",
+        dishName: "Nacho Average Hangry Fix",
         description:
           "A heaping plate of tortilla chips smothered in melty cheese, seasoned ground beef, black beans, pico de gallo, and all the fixings. Because sometimes, chips and salsa just don't cut it.",
         price: 10.99,
@@ -41,8 +41,8 @@ const restaurants = [
         image: "/nac-002.jpeg",
       },
       {
-        id: "d4",
-        name: "The I Regret Nothing Cheeseburger",
+        _id: "d4",
+        dishName: "The I Regret Nothing Cheeseburger",
         description:
           "A double cheeseburger stacked high with all the classic fixings, plus fried pickles and onion rings. This is not for the faint of heart (or stomach), but it's guaranteed to satisfy your deepest cravings.",
         price: 14.5,
@@ -50,8 +50,8 @@ const restaurants = [
         image: "/bur-001.jpeg",
       },
       {
-        id: "d5",
-        name: "S'mores Ain't the Only Flame Broiled Delight",
+        _id: "d5",
+        dishName: "S'mores Ain't the Only Flame Broiled Delight",
         description:
           "A warm, gooey chocolate chip brownie topped with a toasted marshmallow and a generous scoop of vanilla ice cream. Because sometimes, you just gotta roast something (and then eat it).",
         price: 5.99,
@@ -61,7 +61,7 @@ const restaurants = [
     ],
   },
   {
-    id: 2,
+    _id: "2",
     name: "Poke Paradise",
     tagline: "Fresh Bowls, Endless Flavor",
     description:
@@ -76,7 +76,7 @@ const restaurants = [
     category: ["Soup-er Stars", "Vegetarian Ventures"],
     menu: [
       {
-        id: "d21",
+        _id: "d21",
         dishName: "Aloha Classic Poke",
         description:
           "Marinated ahi tuna, cucumber, avocado, red onion, seaweed salad, and our signature Aloha sauce on a bed of sushi rice. ",
@@ -85,7 +85,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d22",
+        _id: "d22",
         dishName: "Spicy Sriracha Shrimp",
         description:
           "Spicy sriracha marinated shrimp, edamame, carrots, bell peppers, and crispy wonton strips tossed in a creamy sriracha mayo over sushi rice.",
@@ -94,7 +94,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d23",
+        _id: "d23",
         dishName: "Veggie Lover's Delight",
         description:
           "Marinated tofu, mixed greens, edamame, cucumber, corn, vegan kimchi, and a light sesame dressing on brown rice.",
@@ -103,7 +103,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d24",
+        _id: "d24",
         dishName: "Spicy Ahi Tuna Tacos",
         description:
           "Two soft tortillas filled with spicy ahi tuna, avocado, pickled cabbage, and our sriracha mayo. Served with a side of mango salsa.",
@@ -114,7 +114,7 @@ const restaurants = [
     ],
   },
   {
-    id: 3,
+    _id: "3",
     name: "Curry Up!",
     tagline: "Aromatic Adventures",
     description:
@@ -133,7 +133,7 @@ const restaurants = [
     ],
     menu: [
       {
-        id: "d31",
+        _id: "d31",
         dishName: "Butter Chicken",
         description:
           "Tender chicken pieces simmered in a creamy tomato and butter sauce with aromatic spices. Served with basmati rice and naan bread.",
@@ -142,7 +142,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d32",
+        _id: "d32",
         dishName: "Green Curry with Vegetables",
         description:
           "Aromatic green curry packed with fresh vegetables like eggplant, zucchini, and bell peppers in a coconut milk broth. Served with steamed jasmine rice.",
@@ -151,7 +151,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d33",
+        _id: "d33",
         dishName: "Panang Curry with Tofu",
         description:
           "Red curry with a hint of sweetness, featuring pan-fried tofu, bell peppers, and green beans. Served with brown rice.",
@@ -160,7 +160,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d34",
+        _id: "d34",
         dishName: "Lamb Rogan Josh",
         description:
           "Flavorful lamb curry cooked with onions, tomatoes, ginger, and a blend of Indian spices. Served with basmati rice and naan bread.",
@@ -169,7 +169,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d35",
+        _id: "d35",
         dishName: "Thai Mango Curry with Shrimp",
         description:
           "Sweet and tangy mango curry with succulent shrimp, bell peppers, and red onion in a coconut milk broth. Served with steamed jasmine rice.",
@@ -180,7 +180,7 @@ const restaurants = [
     ],
   },
   {
-    id: 4,
+    _id: "4",
     name: "The Comfort Zone",
     tagline: "Classic Dishes, Warm Feels",
     description:
@@ -195,7 +195,7 @@ const restaurants = [
     category: ["Adult Lunchables", "International Intrigue"],
     menu: [
       {
-        id: "d41",
+        _id: "d41",
         dishName: "Homestyle Mac and Cheese",
         description:
           "Creamy macaroni and cheese baked to golden perfection with a crispy breadcrumb topping. Pure comfort food bliss!",
@@ -204,7 +204,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d42",
+        _id: "d42",
         dishName: "Grandma's Meatloaf with Mashed Potatoes",
         description:
           "A classic meatloaf recipe smothered in a rich tomato glaze, served with creamy mashed potatoes and seasonal vegetables.",
@@ -213,7 +213,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d43",
+        _id: "d43",
         dishName: "Chicken Pot Pie with Puff Pastry Crust",
         description:
           "Tender chicken, vegetables, and a savory gravy all tucked into a flaky puff pastry crust. A heartwarming classic.",
@@ -222,7 +222,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d44",
+        _id: "d44",
         dishName: "Classic Cheeseburger with Fries",
         description:
           "A juicy all-beef patty topped with melted cheese, lettuce, tomato, onion, and pickles on a toasted bun. Served with a side of crispy fries.",
@@ -231,7 +231,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d45",
+        _id: "d45",
         dishName: "Slow-Cooked Pulled Pork Sandwich",
         description:
           "Tender pulled pork slow-cooked to perfection, served on a toasted bun with BBQ sauce and coleslaw. A finger-licking good option!",
@@ -242,7 +242,7 @@ const restaurants = [
     ],
   },
   {
-    id: 5,
+    _id: "5",
     name: "The Crepe Escape",
     tagline: "Sweet & Savory Delights",
     description:
@@ -257,7 +257,7 @@ const restaurants = [
     category: ["Hangry Helpers", "Sweet Endings"],
     menu: [
       {
-        id: "d51",
+        _id: "d51",
         dishName: "Ham & Cheese Crepe",
         description:
           "A classic savory crepe filled with sliced ham, melted Gruyere cheese, and a touch of Dijon mustard. Simple yet satisfying.",
@@ -266,7 +266,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d52",
+        _id: "d52",
         dishName: "The BLT Crepe",
         description:
           "A twist on the classic BLT! Crispy bacon, lettuce, tomato, and a creamy avocado spread wrapped in a savory crepe.",
@@ -275,7 +275,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d53",
+        _id: "d53",
         dishName: "Smoked Salmon & Cream Cheese Crepe",
         description:
           "Thinly sliced smoked salmon, creamy ricotta cheese, and a sprinkle of fresh dill for a luxurious and light lunch option.",
@@ -284,7 +284,7 @@ const restaurants = [
         image: "",
       },
       {
-        id: "d54",
+        _id: "d54",
         dishName: "Chocolate Dream Crepe",
         description:
           "A warm crepe filled with rich chocolate ganache, topped with fresh strawberries and whipped cream. A decadent dessert dream!",

@@ -3,19 +3,32 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 export interface IRestaurant {
-  _id: object;
+  _id: string;
   name: string;
-  address: object;
+  tagline: string;
+  address: {
+    street: string;
+    postalCode: string;
+    city: string;
+  };
   description: string;
   phone: string;
   email: string;
   category: string[];
-  menu: object[]; //
+  menu: {
+    _id: string;
+    dishName: string;
+    description: string;
+    price: number;
+    meal: string;
+    image: string;
+  }[];
 }
 
 const restaurantSchema = new Schema<IRestaurant>({
   _id: mongoose.Types.ObjectId,
   name: String,
+  tagline: String,
   address: {
     street: String,
     postalCode: String,
@@ -30,7 +43,9 @@ const restaurantSchema = new Schema<IRestaurant>({
       _id: mongoose.Types.ObjectId,
       dishName: String,
       description: String,
-      price: String,
+      price: Number,
+      meal: String,
+      image: String,
     },
   ],
 });
