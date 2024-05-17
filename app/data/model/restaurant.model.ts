@@ -6,6 +6,7 @@ export interface IRestaurant {
   _id: string;
   name: string;
   tagline: string;
+  logo: string;
   address: {
     street: string;
     postalCode: string;
@@ -29,6 +30,7 @@ const restaurantSchema = new Schema<IRestaurant>({
   _id: mongoose.Types.ObjectId,
   name: String,
   tagline: String,
+  logo: String,
   address: {
     street: String,
     postalCode: String,

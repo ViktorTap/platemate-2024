@@ -12,6 +12,8 @@ interface IUser {
   confirmPassword: string;
 }
 
+// need to add default values
+
 const userSchema = new Schema<IUser>({
   firstName: String,
   lastName: String,

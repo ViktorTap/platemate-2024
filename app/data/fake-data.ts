@@ -3,6 +3,7 @@ const restaurants = [
     _id: "1",
     name: "Restix",
     tagline: "Conquer Cravings, Savor Sweets",
+    logo: "/rest-logos/restix-001.jpeg",
     description: "Hearty meals for hankerings and delicious sweet treats",
     address: {
       street: "Ratakatu 5",
@@ -64,6 +65,7 @@ const restaurants = [
     _id: "2",
     name: "Poke Paradise",
     tagline: "Fresh Bowls, Endless Flavor",
+    logo: "/rest-logos/poke-002.jpeg",
     description:
       "Build your own poke bowl with fresh, delicious ingredients or choose one of our signature creations. Perfect for a healthy and satisfying meal.",
     address: {
@@ -117,6 +119,7 @@ const restaurants = [
     _id: "3",
     name: "Curry Up!",
     tagline: "Aromatic Adventures",
+    logo: "/rest-logos/curry-003.jpeg",
     description:
       "Explore the world of curries with our flavorful dishes from India, Thailand, and beyond. Vegan and vegetarian options available.",
     address: {
@@ -183,6 +186,7 @@ const restaurants = [
     _id: "4",
     name: "The Comfort Zone",
     tagline: "Classic Dishes, Warm Feels",
+    logo: "/rest-logos/comfort-004.jpeg",
     description:
       "Indulge in your favorite comfort food classics. From mac and cheese to slow-cooked roasts, we've got something to warm your soul.",
     address: {
@@ -245,6 +249,7 @@ const restaurants = [
     _id: "5",
     name: "The Crepe Escape",
     tagline: "Sweet & Savory Delights",
+    logo: "/rest-logos/crepe-005.jpeg",
     description:
       "Escape to a world of delicious crepes. Choose from savory fillings for a satisfying lunch or indulge in our decadent sweet creations for a delightful treat.",
     address: {
