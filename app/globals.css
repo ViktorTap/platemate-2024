@@ -144,6 +144,30 @@ input:focus, input:not([value=""]) {
   transition: 0.2s;
 }
 
+/* RESTAURANT LIST */
+.restaurant-list-main-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+
+  margin-top: 1.25rem;
+  
+}
+
+/* RESTAURANT CARD */
+.restaurant-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
+  border: 1px solid black;
+  text-align: center;
+
+
+  width: 225px;
+  height: 500px;
+}
 
 
 
