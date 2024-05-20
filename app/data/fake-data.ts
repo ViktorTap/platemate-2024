@@ -5,6 +5,15 @@ const restaurants = [
     tagline: "Conquer Cravings, Savor Sweets",
     logo: "/rest-logos/restix-001.jpeg",
     description: "Hearty meals for hankerings and delicious sweet treats",
+    open: {
+      mon: "09-20",
+      tues: "09-20",
+      wed: "09-20",
+      thurs: "09-20",
+      fri: "09-20",
+      sat: "12-22",
+      sun: "closed",
+    },
     address: {
       street: "Ratakatu 5",
       postalCode: "00100",
@@ -21,7 +30,7 @@ const restaurants = [
           "Scrambled eggs, bacon, sausage, cheese, hash browns, all wrapped up in a warm flour tortilla. This monster will banish your hanger faster than you can say 'breakfast burrito.'",
         price: 8.99,
         meal: "Breakfast",
-        image: "/bur-001.jpeg",
+        image: "/dishes/bur-001.jpeg",
       },
       {
         _id: "d2",
@@ -30,7 +39,7 @@ const restaurants = [
           "A 16-inch pizza piled high with your choice of toppings. Perfect for when you need a cheesy, saucy intervention for your hanger.  Don't worry, we won't judge.",
         price: 12.49,
         meal: "Lunch/Dinner",
-        image: "/piz-005.jpeg",
+        image: "/dishes/piz-005.jpeg",
       },
       {
         _id: "d3",
@@ -39,7 +48,7 @@ const restaurants = [
           "A heaping plate of tortilla chips smothered in melty cheese, seasoned ground beef, black beans, pico de gallo, and all the fixings. Because sometimes, chips and salsa just don't cut it.",
         price: 10.99,
         meal: "Lunch/Dinner",
-        image: "/nac-002.jpeg",
+        image: "/dishes/nac-002.jpeg",
       },
       {
         _id: "d4",
@@ -48,7 +57,7 @@ const restaurants = [
           "A double cheeseburger stacked high with all the classic fixings, plus fried pickles and onion rings. This is not for the faint of heart (or stomach), but it's guaranteed to satisfy your deepest cravings.",
         price: 14.5,
         meal: "Lunch/Dinner",
-        image: "/bur-001.jpeg",
+        image: "/dishes/bur-001.jpeg",
       },
       {
         _id: "d5",
@@ -57,7 +66,7 @@ const restaurants = [
           "A warm, gooey chocolate chip brownie topped with a toasted marshmallow and a generous scoop of vanilla ice cream. Because sometimes, you just gotta roast something (and then eat it).",
         price: 5.99,
         meal: "Dessert",
-        image: "/bro-004.jpeg",
+        image: "/dishes/bro-004.jpeg",
       },
     ],
   },
@@ -68,6 +77,15 @@ const restaurants = [
     logo: "/rest-logos/poke-002.jpeg",
     description:
       "Build your own poke bowl with fresh, delicious ingredients or choose one of our signature creations. Perfect for a healthy and satisfying meal.",
+    open: {
+      mon: "09-20",
+      tues: "09-20",
+      wed: "09-20",
+      thurs: "09-20",
+      fri: "09-20",
+      sat: "12-22",
+      sun: "closed",
+    },
     address: {
       street: "Aallopojantie 17",
       postalCode: "00700",
@@ -122,6 +140,15 @@ const restaurants = [
     logo: "/rest-logos/curry-003.jpeg",
     description:
       "Explore the world of curries with our flavorful dishes from India, Thailand, and beyond. Vegan and vegetarian options available.",
+    open: {
+      mon: "09-20",
+      tues: "09-20",
+      wed: "09-20",
+      thurs: "09-20",
+      fri: "09-20",
+      sat: "12-22",
+      sun: "closed",
+    },
     address: {
       street: "Iso Roobertinkatu 22",
       postalCode: "00120",
@@ -189,6 +216,15 @@ const restaurants = [
     logo: "/rest-logos/comfort-004.jpeg",
     description:
       "Indulge in your favorite comfort food classics. From mac and cheese to slow-cooked roasts, we've got something to warm your soul.",
+    open: {
+      mon: "09-20",
+      tues: "09-20",
+      wed: "09-20",
+      thurs: "09-20",
+      fri: "09-20",
+      sat: "12-22",
+      sun: "closed",
+    },
     address: {
       street: "Yliopistonkatu 29",
       postalCode: "20100",
@@ -252,6 +288,15 @@ const restaurants = [
     logo: "/rest-logos/crepe-005.jpeg",
     description:
       "Escape to a world of delicious crepes. Choose from savory fillings for a satisfying lunch or indulge in our decadent sweet creations for a delightful treat.",
+    open: {
+      mon: "09-20",
+      tues: "09-20",
+      wed: "09-20",
+      thurs: "09-20",
+      fri: "09-20",
+      sat: "12-22",
+      sun: "closed",
+    },
     address: {
       street: "Kauppakatu 10",
       postalCode: "70100",

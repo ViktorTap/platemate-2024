@@ -13,6 +13,15 @@ export interface IRestaurant {
     city: string;
   };
   description: string;
+  open: {
+    mon: string;
+    tues: string;
+    wed: string;
+    thurs: string;
+    fri: string;
+    sat: string;
+    sun: string;
+  };
   phone: string;
   email: string;
   category: string[];
@@ -37,6 +46,15 @@ const restaurantSchema = new Schema<IRestaurant>({
     city: String,
   },
   description: String,
+  open: {
+    mon: String,
+    tues: String,
+    wed: String,
+    thurs: String,
+    fri: String,
+    sat: String,
+    sun: String,
+  },
   phone: String,
   email: String,
   category: [String],
