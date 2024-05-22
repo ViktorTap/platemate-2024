@@ -6,7 +6,7 @@ export default function RestaurantCard(restaurant: IRestaurant) {
   return (
     <Link href={`/restaurants/${restaurant._id}`}>
       <section className="restaurant-card-container">
-        <h1 className="mb-2">{restaurant.name}</h1>
+        <h1 className="mb-2 font-bold">{restaurant.name}</h1>
         <Image
           src={
             restaurant.logo !== ""
@@ -16,13 +16,13 @@ export default function RestaurantCard(restaurant: IRestaurant) {
           alt="Restaurant logo"
           width={175}
           height={175}
-          className="mb-2"
+          className="mb-2 rounded-lg"
         />
         <p className="mb-2">
           <i>{restaurant.tagline}</i>
         </p>
         <article className="flex-col justify-center mb-2">
-          <h1>OSOITE:</h1>
+          <h1>ADDRESS:</h1>
           <p>{restaurant.address.street}</p>
           <p>{restaurant.address.postalCode}</p>
           <p>{restaurant.address.city}</p>

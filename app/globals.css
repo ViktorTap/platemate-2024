@@ -3,18 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --background-primary-hex: #d3efbf;
-  --background-secondary-hex: #A5DD9B;
+  --background-primary-hex: #fefeff;
+  --background-secondary-hex: #becace;
 
-  --button-primary-hex: #BDE3FF;
-  --button-hover-hex: #7DC9FF;
-  --button-active-hex: #3EAFFF;
+  --button-primary-hex: #fefeff;
+  --button-hover-hex: #2f8c43;
+  --button-active-hex: #125e23;
 
-  --paragraph-primary-hex: #032137;
+  --border-color-hex: #2f8c43;
+
+  --paragraph-primary-hex: #052b4a;
 }
 
 body {
-  background-color: beige;
+  background-color: var(--background-primary-hex);
   max-width: 1024px;
   margin-inline: auto;
   padding: 0.75rem;
@@ -30,6 +32,7 @@ button {
   border-radius: 0.5rem;
   font-weight: 600;
   white-space: nowrap;
+  border: 2px solid var(--border-color-hex);
 }
 button:hover {
   background-color: var(--button-hover-hex);
@@ -68,9 +71,9 @@ button:disabled {
 .text-input {
   background: transparent;
   border-radius: 0.75rem;
-  border: 1px solid #032137;
+  border: 2px solid var(--border-color-hex);
   box-sizing: border-box;
-  color: #032137;
+  color: var(--paragraph-primary-hex);
   font-size: 1rem;
   padding: 0.75rem 0.75rem;
   outline: none;
@@ -83,9 +86,9 @@ button:disabled {
 #text-input-error {
   background: transparent;
   border-radius: 0.75rem;
-  border: 1px solid red;
+  border: 2px solid red;
   box-sizing: border-box;
-  color: #032137;
+  color: var(--paragraph-primary-hex);
   font-size: 1rem;
   margin-bottom: 1.5rem;
   padding: 0.75rem 0.75rem;
@@ -98,15 +101,15 @@ button:disabled {
 label {
   position: absolute;
   left: 0;
-  padding: 0.75rem 0.75rem;
+  padding: 0.80rem 0.75rem;
   pointer-events: none;
   transition: 0.2s;
 }
 
 input:focus + label, input:not([value=""]) + label
 {
-  color:green;
-  border: 1px solid green;
+  color:var(--border-color-hex);
+  border: 2px solid var(--border-color-hex);
   border-radius: 0.75rem;
   font-size: 0.75rem;
   padding: 0 0.75rem;
@@ -116,29 +119,29 @@ input:focus + label, input:not([value=""]) + label
 } 
 
 input:focus, input:not([value=""]) {
-  border: 1px solid green;
+  border: 2px solid var(--border-color-hex);
 }
 
 #text-input-error:focus + label,
 #text-input-error:not([value=""]) + label {
-  color:#032137;
-  border: 1px solid red;
+  color:var(--paragraph-primary-hex);
+  border: 2px solid red;
   border-radius: 0.75rem;
   font-size: 0.75rem;
   padding: 0 0.75rem;
-  background-color: beige;
+  background-color: var(--background-primary-hex);
   transform: translate(15px, -9px);
  
 }
 
 .input-error-message {
   position: absolute;
-  border: 1px solid red;
-  background-color: beige;
+  border: 2px solid red;
+  background-color: var(--background-primary-hex);
   border-radius: 0.75rem;
   font-size: 0.75rem;
   left: 100px;
-  bottom: 19px;
+  bottom: 17px;
   padding: 0 0.75rem;
   pointer-events: none;
   transition: 0.2s;
@@ -157,42 +160,84 @@ input:focus, input:not([value=""]) {
 
 /* RESTAURANT CARD */
 .restaurant-card-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0.5rem 0 0.5rem 0;
-  border: 1px solid black;
+  border: 2px solid var(--border-color-hex);
   text-align: center;
-
+  border-radius: 0.5rem;
 
   width: 225px;
   height: 500px;
+
+  transition: all 0.5s ease-in-out;
+}
+
+.restaurant-card-container:hover {
+
+  background-color: #2f8c43;
+  transition: 0.5s ease-in-out;
+  color: var(--background-primary-hex);
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -4px;
+  
 }
 
 /* RESTAURANT DETAIL */
 .restaurant-detail-main-container {
-  border: 1px solid orange;
+  border: 2px solid var(--border-color-hex);
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  border-radius: 0.5rem;
 }
 
 .restaurant-info-container {
-  border: 1px solid blue;
+  border: 2px solid var(--border-color-hex);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+
   display: flex;
   flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .menu-main-container {
-  /* border: 1px solid green; */
+  /* border: 2px solid var(--border-color-hex); */
+  margin-top: 1.25rem;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+  overflow: visible;
 }
 
 .dish-container {
-  /* border: 1px solid red; */
+  border: 2px solid var(--border-color-hex);
+  border-radius: 0.5rem;
   display: flex;
+  padding: 0.5rem;
   gap: 1rem;
   
+}
+
+.dish-info-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dish-name-desc-container {
+  flex: 2;
+}
+
+.dish-meal-price-container {
+  flex: 1;
+  text-align: center;
 }
 
 

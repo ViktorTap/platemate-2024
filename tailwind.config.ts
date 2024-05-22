@@ -16,6 +16,7 @@ const config: Config = {
         "button-hover-hex": "var(--button-hover-hex)",
         "button-active-hex": "var(--button-active-hex)",
         "paragraph-primary-hex": "var(--paragraph-primary-hex)",
+        "border-color-hex": "var(--border-color-hex",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
