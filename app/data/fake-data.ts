@@ -68,6 +68,33 @@ const restaurants = [
         meal: "Dessert",
         image: "/dishes/bro-004.jpeg",
       },
+      {
+        _id: "d7",
+        dishName: "Nacho Average Hangry Fix",
+        description:
+          "A heaping plate of tortilla chips smothered in melty cheese, seasoned ground beef, black beans, pico de gallo, and all the fixings. Because sometimes, chips and salsa just don't cut it.",
+        price: 10.99,
+        meal: "Lunch/Dinner",
+        image: "",
+      },
+      {
+        _id: "d8",
+        dishName: "The I Regret Nothing Cheeseburger",
+        description:
+          "A double cheeseburger stacked high with all the classic fixings, plus fried pickles and onion rings. This is not for the faint of heart (or stomach), but it's guaranteed to satisfy your deepest cravings.",
+        price: 14.5,
+        meal: "Lunch/Dinner",
+        image: "",
+      },
+      {
+        _id: "d9",
+        dishName: "S'mores Ain't the Only Flame Broiled Delight",
+        description:
+          "A warm, gooey chocolate chip brownie topped with a toasted marshmallow and a generous scoop of vanilla ice cream. Because sometimes, you just gotta roast something (and then eat it).",
+        price: 5.99,
+        meal: "Dessert",
+        image: "",
+      },
     ],
   },
   {

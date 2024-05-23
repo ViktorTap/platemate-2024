@@ -188,10 +188,11 @@ input:focus, input:not([value=""]) {
 
 /* RESTAURANT DETAIL */
 .restaurant-detail-main-container {
-  border: 2px solid var(--border-color-hex);
+ /* border-right: 2px solid var(--border-color-hex);*/
+
   padding: 1.25rem;
-  margin-top: 1.25rem;
-  border-radius: 0.5rem;
+  margin-top: 0.25rem;
+ 
 }
 
 .restaurant-info-container {

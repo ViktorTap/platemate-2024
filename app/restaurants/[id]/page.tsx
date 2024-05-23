@@ -1,11 +1,31 @@
+"use client";
+
 import restaurants from "@/app/data/fake-data";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function RestaurantPage({ params }: { params: { id: string } }) {
   const targetRestaurant = restaurants.filter((restaurant) => {
     return restaurant && restaurant._id === params.id;
   });
+
+  // here is pagination magic
+  const [visibleDishes, setVisibleDishes] = useState(
+    targetRestaurant[0].menu.slice(0, 5)
+  );
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(targetRestaurant[0].menu.length > 5);
+
+  const loadMore = () => {
+    const newPage = page + 1;
+    const newDishes = targetRestaurant[0].menu.slice(page * 5, newPage * 5);
+    setVisibleDishes((prevDishes) => [...prevDishes, ...newDishes]);
+    setPage(newPage);
+    if (newDishes.length < 5) {
+      setHasMore(false);
+    }
+  };
 
   return (
     <main>
@@ -58,7 +78,7 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
               </div>
             </div>
             <div className="menu-main-container">
-              {rest.menu.map((dish) => {
+              {visibleDishes.map((dish) => {
                 return (
                   <div key={dish._id} className="dish-container">
                     <Image
@@ -92,6 +112,7 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
                   </div>
                 );
               })}
+              {hasMore && <button onClick={loadMore}>Load More</button>}
             </div>
           </div>
         );

@@ -35,6 +35,15 @@ export interface IRestaurant {
   }[];
 }
 
+export interface IDish {
+  _id: string;
+  dishName: string;
+  description: string;
+  price: number;
+  meal: string;
+  image: string;
+}
+
 const restaurantSchema = new Schema<IRestaurant>({
   _id: mongoose.Types.ObjectId,
   name: String,
