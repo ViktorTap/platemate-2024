@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema, model } = mongoose;
-
-interface IUser {
+export interface IUser {
   firstName: string;
   lastName: string;
   address: object;
@@ -14,7 +12,7 @@ interface IUser {
 
 // need to add default values
 
-const userSchema = new Schema<IUser>({
+const userSchema = new mongoose.Schema<IUser>({
   firstName: String,
   lastName: String,
   address: {
@@ -28,6 +26,9 @@ const userSchema = new Schema<IUser>({
   confirmPassword: String,
 });
 
-const User = model<IUser>("users", userSchema);
+// const User = mongoose.model<IUser>("users", userSchema);
+
+const User =
+  mongoose.models.users || mongoose.model<IUser>("users", userSchema);
 
 export default User;

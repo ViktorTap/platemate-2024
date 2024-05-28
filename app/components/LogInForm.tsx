@@ -1,11 +1,11 @@
 "use client";
-
 import Link from "next/link";
-
-import loginUser from "../actions/auth";
 
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
+import { signIn } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface CustomTextInputTypes {
   name: string;
@@ -42,6 +42,16 @@ export default function LogIn() {
     password: string;
   }
 
+  const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam) {
+      setError(errorParam);
+    }
+  }, [searchParams]);
+
   return (
     <>
       <Formik<LogInValues>
@@ -57,17 +67,20 @@ export default function LogIn() {
           password: Yup.string().required("Please enter a password"),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
-          try {
-            const res = await loginUser(values.email, values.password);
+          const res = await signIn("credentials", {
+            redirect: false,
+            email: values.email,
+            password: values.password,
+            callbackUrl: "/",
+          });
 
-            if (typeof res === "object" && "message" in res) {
-              console.log(res.message);
-            } else {
-              console.log("Log in might be successful. Check server logs.");
+          if (res?.error) {
+            setError(res.error);
+          } else {
+            setError(null);
+            if (res?.url) {
+              window.location.href = res.url;
             }
-          } catch (error) {
-            console.error("Error in logging in:", error);
           }
 
           setSubmitting(false);
@@ -82,7 +95,8 @@ export default function LogIn() {
                 name="password"
                 type="password"
               />
-
+              {/* CSS  ! ! ! */}
+              {error && <div className="form-error">{error}</div>}
               <button
                 className="submit-button"
                 type="submit"
