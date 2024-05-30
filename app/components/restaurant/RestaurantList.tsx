@@ -1,10 +1,13 @@
-import restaurants from "../../data/fake-data";
-
+// Components
 import RestaurantCard from "./RestaurantCard";
 
+// Model
 import { IRestaurant } from "@/app/data/model/restaurant.model";
+interface IRestaurantListProps {
+  restaurants: IRestaurant[];
+}
 
-export default function RestaurantList() {
+export default function RestaurantList({ restaurants }: IRestaurantListProps) {
   return (
     <main
       className="restaurant-list-main-container"

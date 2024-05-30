@@ -32,12 +32,13 @@ export default function RestaurantCard(restaurant: IRestaurant) {
           <p>
             <strong>Category:</strong>
           </p>
-          {restaurant.category.map((category) => {
+
+          {restaurant.category.map((category, index) => {
             return (
-              <>
-                <span key={category}>{category}</span>
+              <div key={index}>
+                <span>{category}</span>
                 <br></br>
-              </>
+              </div>
             );
           })}
         </article>
