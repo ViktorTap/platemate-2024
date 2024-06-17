@@ -1,5 +1,5 @@
 "use client";
-// Model
+// Model & Interface
 import { IRestaurant } from "@/app/data/model/restaurant.model";
 
 // Interface
@@ -25,4 +25,4 @@ export default function CategoriesBar({
 }
 // Pictures with names of categories
 // Clicking to certain category -> change main page restaurant list by category
-// Will pass state change into main paig -> restaurant list
+// Will pass state change into main page -> restaurant list

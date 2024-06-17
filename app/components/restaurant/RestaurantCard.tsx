@@ -1,6 +1,9 @@
-import { IRestaurant } from "@/app/data/model/restaurant.model";
+// Next
 import Image from "next/image";
 import Link from "next/link";
+
+// Interface
+import { IRestaurant } from "@/app/data/model/restaurant.model";
 
 export default function RestaurantCard(restaurant: IRestaurant) {
   return (
