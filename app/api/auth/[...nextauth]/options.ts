@@ -1,18 +1,15 @@
+// NextAuth
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+// BCRYPT
 import bcrypt from "bcrypt";
+
+// DB
 import { connectDB } from "../../../data/dbConnector";
-import { IUser } from "../../../data/model/user.model";
 
+// Model
 import User from "../../../data/model/user.model";
-
-interface IAuthUser {
-  id: string;
-  email: string;
-  message: string;
-  success: boolean;
-}
 
 export const options: NextAuthOptions = {
   providers: [

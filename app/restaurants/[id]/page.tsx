@@ -5,6 +5,8 @@ import restaurants from "@/app/data/fake-data";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+import DishCard from "@/app/components/menu/DishCard";
+
 export default function RestaurantPage({ params }: { params: { id: string } }) {
   const targetRestaurant = restaurants.filter((restaurant) => {
     return restaurant && restaurant._id === params.id;
@@ -81,34 +83,7 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
               {visibleDishes.map((dish) => {
                 return (
                   <div key={dish._id} className="dish-container">
-                    <Image
-                      src={
-                        dish.image !== ""
-                          ? dish.image
-                          : "/dishes/default-dish-icon.jpg"
-                      }
-                      alt="Dish icon"
-                      width={150}
-                      height={150}
-                    />
-                    <section className="dish-info-container">
-                      <article className="dish-name-desc-container">
-                        <p className="mb-1">
-                          <strong>{dish.dishName}</strong>
-                        </p>
-                        <p>{dish.description}</p>
-                      </article>
-
-                      <article className="dish-meal-price-container">
-                        <p>
-                          <i>Recommended as: </i>
-                        </p>
-                        <p>{dish.meal}</p>
-                        <p className="mt-0.5">
-                          <strong>{dish.price} €</strong>
-                        </p>
-                      </article>
-                    </section>
+                    <DishCard {...dish} />
                   </div>
                 );
               })}

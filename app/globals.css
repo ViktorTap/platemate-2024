@@ -150,12 +150,11 @@ input:focus, input:not([value=""]) {
 /* RESTAURANT LIST */
 .restaurant-list-main-container {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
   gap: 1rem;
-  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
-
   margin-top: 1.25rem;
-  
+
 }
 
 /* RESTAURANT CARD */
@@ -173,6 +172,8 @@ input:focus, input:not([value=""]) {
   height: 500px;
 
   transition: all 0.5s ease-in-out;
+
+
 }
 
 .restaurant-card-container:hover {
