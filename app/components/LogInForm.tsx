@@ -36,7 +36,7 @@ const CustomTextInput: React.FC<CustomTextInputTypes> = ({
   );
 };
 
-export default function LogIn() {
+export default function LogInForm() {
   interface LogInValues {
     email: string;
     password: string;

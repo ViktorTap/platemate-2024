@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import NavigationBar from "./components/NavigarionBar";
+
+// Style
 import "./globals.css";
+import { Inter } from "next/font/google";
+
+// Components
+import NavigationBar from "./components/NavigarionBar";
+import SessionProviderWrapper from "./components/SessionProviderWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavigationBar />
-        <main>{children}</main>
+        <SessionProviderWrapper>
+          <NavigationBar />
+          {children}
+        </SessionProviderWrapper>
       </body>
     </html>
   );

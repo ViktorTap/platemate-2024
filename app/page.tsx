@@ -23,7 +23,7 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setDisplayRestaurants(restaurants);
-    }, 3000);
+    }, 1500);
   }, []);
 
   return (

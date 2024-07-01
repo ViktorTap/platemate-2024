@@ -12,6 +12,10 @@ import { connectDB } from "../../../data/dbConnector";
 import User from "../../../data/model/user.model";
 
 export const options: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
+
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -26,6 +30,8 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials): Promise<any> {
+        if (credentials === null) return null;
+
         // connect to the database
         await connectDB();
 
@@ -46,7 +52,7 @@ export const options: NextAuthOptions = {
             throw new Error("Email not found");
           }
 
-          // check it the password is correct
+          // check if the password is correct
           const isMatch = await bcrypt.compare(
             credentials?.password!,
             user.password
@@ -62,6 +68,7 @@ export const options: NextAuthOptions = {
             throw new Error("Incorrect password");
           }
           console.log("Successfull login");
+
           return {
             id: user._id.toString(),
             email: credentials?.email as string,
@@ -92,6 +99,22 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user = {
+          email: token.email,
+        };
+      }
+      return session;
+    },
+  },
   pages: {
     signIn: "/account",
   },
