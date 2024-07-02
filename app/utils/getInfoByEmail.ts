@@ -1,15 +1,30 @@
+"use server";
 import { connectDB } from "../data/dbConnector";
 
 import User from "../data/model/user.model";
 
-export default async function getInfoByEmail(email: string | null | undefined) {
+interface ProfileIntoPageProps {
+  email: string | null | undefined;
+}
+
+export default async function getInfoByEmail({
+  email,
+}: ProfileIntoPageProps): Promise<any> {
   try {
-    await connectDB();
+    connectDB();
+    console.log("Connected to DB, email:", email);
 
-    const user = await User.findOne({ email: email });
+    //   if (!email) {
+    //     throw new Error("Email is not provided");
 
-    return user;
+    // const user = await User.findOne({ email: email });
+
+    // console.log("User found:", user);
+
+    // return user;
+    return;
   } catch (error) {
-    console.log(error);
+    console.error("Error in getInfoByEmail:", error);
+    throw error; // Re-throw the error to handle it in the calling function
   }
 }
