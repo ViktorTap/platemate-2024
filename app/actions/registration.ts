@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { connectDB } from "../data/dbConnector";
 
 import User from "../data/model/user.model";
+import { redirect } from "next/navigation";
 
 interface Values {
   firstName: string;
@@ -50,6 +51,8 @@ export const registerUser = async (
     await newUser.save();
 
     console.log(newUser);
+
+    redirect("/");
 
     return {
       message: `New user - ${newUser.firstName} is created successfully.`,

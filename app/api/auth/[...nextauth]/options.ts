@@ -71,6 +71,7 @@ export const options: NextAuthOptions = {
 
           return {
             id: user._id.toString(),
+            name: user.firstName,
             email: credentials?.email as string,
             message: "Successfull login",
             success: true,
@@ -103,6 +104,7 @@ export const options: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.email = user.email;
+        token.name = user.name;
       }
       return token;
     },
@@ -110,6 +112,7 @@ export const options: NextAuthOptions = {
       if (token) {
         session.user = {
           email: token.email,
+          name: token.name,
         };
       }
       return session;

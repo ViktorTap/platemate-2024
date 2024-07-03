@@ -15,18 +15,22 @@ export default function NavigationBar() {
         </button>
 
         {status === "authenticated" ? (
-          <div>
-            Authenticated <button onClick={() => signOut()}>SIGN OUT</button>
-          </div>
+          <>
+            <button className="basis-1/6">
+              <Link href="/account/my">{session.user?.name}</Link>
+            </button>
+            <button className="basis-1/6">
+              <Link href="/cart">Cart</Link>
+            </button>
+            <button onClick={() => signOut({ callbackUrl: "/" })}>
+              Sign Out
+            </button>
+          </>
         ) : (
-          <div>NAH</div>
+          <button className="basis-2/5">
+            <Link href="/account">Log In / Sign Up</Link>
+          </button>
         )}
-        <button className="basis-2/5">
-          <Link href="/account">Log In / Sign Up</Link>
-        </button>
-        <button className="basis-1/6">
-          <Link href="/cart">Cart</Link>
-        </button>
       </ul>
     </nav>
   );
