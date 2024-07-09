@@ -1,3 +1,4 @@
+// Next
 import Image from "next/image";
 
 interface IDish {
@@ -18,6 +19,7 @@ export default function DishCard(dish: IDish) {
         width={150}
         height={150}
       />
+
       <section className="dish-info-container">
         <article className="dish-name-desc-container">
           <p className="mb-1">

@@ -197,7 +197,7 @@ input:focus, input:not([value=""]) {
 }
 
 .restaurant-info-container {
-  border: 2px solid var(--border-color-hex);
+  border: 2px solid var(--border-color-hex); 
   border-radius: 0.5rem;
   padding: 0.75rem;
 
@@ -208,18 +208,19 @@ input:focus, input:not([value=""]) {
 }
 
 .menu-main-container {
-  /* border: 2px solid var(--border-color-hex); */
+ 
   margin-top: 1.25rem;
-  border-radius: 0.5rem;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* padding: 0.5rem; */
+
   overflow: visible;
 }
 
 .dish-container {
   border: 2px solid var(--border-color-hex);
+
   border-radius: 0.5rem;
   display: flex;
   padding: 0.5rem;
@@ -231,7 +232,10 @@ input:focus, input:not([value=""]) {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+
 }
+
 
 .dish-name-desc-container {
   flex: 2;
@@ -242,6 +246,29 @@ input:focus, input:not([value=""]) {
   text-align: center;
 }
 
+/* DISH PAGE */
+.dish-modal-main-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dish-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+}
 
 
 

@@ -8,9 +8,16 @@ export interface IUser {
   email: string;
   password: string;
   confirmPassword: string;
+  // cart: {
+  //   dish_id: string;
+  //   restaurantName: string;
+  //   dishPrice: number;
+  // }[];
+  // orderHistory: object[];
 }
 
 // need to add default values
+// cart: [{restaurantName: string, dishName: string, dish_id:, dishPrice: string }]
 
 const userSchema = new mongoose.Schema<IUser>({
   firstName: String,
@@ -24,12 +31,29 @@ const userSchema = new mongoose.Schema<IUser>({
   email: String,
   password: String,
   confirmPassword: String,
+  // cart: [
+  //   {
+  //     dish_id: String,
+  //     restaurantName: String,
+  //     dishPrice: Number,
+  //   },
+  // ],
+  // orderHistory: [
+  //   {
+  //     order: {
+  //       _id: mongoose.Types.ObjectId,
+  //       dishes: [String],
+  //       totalPrice: Number,
+  //     },
+  //     created: {
+  //       type: Date,
+  //       default: Date.now,
+  //     },
+  //   },
+  // ],
 });
-
-// const User = mongoose.model<IUser>("users", userSchema);
 
 const User =
   mongoose.models.users || mongoose.model<IUser>("users", userSchema);
-// mognoose.models.users
 
 export default User;

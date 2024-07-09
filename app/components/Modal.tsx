@@ -1,39 +1,32 @@
-import React, { useState, useRef, useEffect } from "react";
+"use client";
 
-interface ModalProps {
-  isOpen: boolean; // Prop to control modal visibility
-  onClose?: () => void; // Optional prop for handling close actions
-  children: React.ReactNode; // Content to be displayed inside the modal
+import React, { useState } from "react";
+
+interface IDish {
+  _id: string;
+  dishName: string;
+  description: string;
+  price: number;
+  meal: string;
+  image: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const [isClosing, setIsClosing] = useState(false); // State for animation
+interface IDishProps {
+  dish: IDish;
+}
+interface IModalProps extends IDishProps {
+  onClose?: () => void; // Optional prop for handling close actions
+}
 
-  const modalRef = useRef<HTMLDivElement>(null); // Ref for modal element
-
-  // Handle close functionality with optional animation
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      if (onClose) {
-        onClose();
-      }
-    }, 300); // Adjust animation duration as needed
-  };
-
+export default function Modal({ onClose, dish }: IModalProps) {
   return (
-    <div
-      ref={modalRef}
-      className={`modal ${isOpen ? "" : "hidden"} ${
-        isClosing ? "closing" : ""
-      }`}
-    >
-      <div className="modal-content">{children}</div>
-      <button type="button" onClick={handleClose}>
-        Close
-      </button>
+    <div className="dish-modal-main-container">
+      <section className="dish-modal-content">
+        <h1>This is Modal</h1>
+
+        <button onClick={onClose}>X</button>
+        <div>{dish.dishName}</div>
+      </section>
     </div>
   );
-};
-
-export default Modal;
+}

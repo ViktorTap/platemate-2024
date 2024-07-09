@@ -1,16 +1,23 @@
 "use client";
 
+// Data
 import restaurants from "@/app/data/fake-data";
 
+// Next
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+// Components
 import DishCard from "@/app/components/menu/DishCard";
+import Link from "next/link";
+import Modal from "@/app/components/Modal";
 
 export default function RestaurantPage({ params }: { params: { id: string } }) {
   const targetRestaurant = restaurants.filter((restaurant) => {
     return restaurant && restaurant._id === params.id;
   });
+
+  console.log(params);
 
   // here is pagination magic
   const [visibleDishes, setVisibleDishes] = useState(
@@ -18,6 +25,11 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
   );
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(targetRestaurant[0].menu.length > 5);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const loadMore = () => {
     const newPage = page + 1;
@@ -82,8 +94,13 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
             <div className="menu-main-container">
               {visibleDishes.map((dish) => {
                 return (
-                  <div key={dish._id} className="dish-container">
+                  <div
+                    key={dish._id}
+                    className="dish-container"
+                    onClick={toggleModal}
+                  >
                     <DishCard {...dish} />
+                    {isModalOpen && <Modal onClose={toggleModal} dish={dish} />}
                   </div>
                 );
               })}
