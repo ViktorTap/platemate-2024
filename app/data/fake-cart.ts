@@ -1,0 +1,42 @@
+export const cart = [
+  {
+    dish_id: "1",
+    dishName: "Ratata",
+    quantity: 1,
+    restaurantName: "Restaurant name",
+    restaurantUrl: "/restaurant/3",
+    dishPrice: 20,
+  },
+  {
+    dish_id: "2",
+    dishName: "Ratata",
+    quantity: 1,
+    restaurantName: "Restaurant name",
+    restaurantUrl: "/restaurant/3",
+    dishPrice: 20,
+  },
+  {
+    dish_id: "3",
+    dishName: "Ratata",
+    quantity: 1,
+    restaurantName: "Restaurant name",
+    restaurantUrl: "/restaurant/3",
+    dishPrice: 20,
+  },
+  {
+    dish_id: "4",
+    dishName: "Ratata",
+    quantity: 1,
+    restaurantName: "Restaurant name",
+    restaurantUrl: "/restaurant/3",
+    dishPrice: 20,
+  },
+  {
+    dish_id: "5",
+    dishName: "Ratata",
+    quantity: 1,
+    restaurantName: "Restaurant name",
+    restaurantUrl: "/restaurant/3",
+    dishPrice: 20,
+  },
+];

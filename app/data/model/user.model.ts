@@ -34,7 +34,10 @@ const userSchema = new mongoose.Schema<IUser>({
   // cart: [
   //   {
   //     dish_id: String,
+  //     dishName: String,
+  //     quantity: Number,
   //     restaurantName: String,
+  //     restaurantUrl: String,
   //     dishPrice: Number,
   //   },
   // ],
@@ -43,6 +46,7 @@ const userSchema = new mongoose.Schema<IUser>({
   //     order: {
   //       _id: mongoose.Types.ObjectId,
   //       dishes: [String],
+  //       quantity: [Number],
   //       totalPrice: Number,
   //     },
   //     created: {

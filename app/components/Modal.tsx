@@ -20,11 +20,16 @@ interface IModalProps extends IDishProps {
 
 export default function Modal({ onClose, dish }: IModalProps) {
   return (
-    <div className="dish-modal-main-container">
-      <section className="dish-modal-content">
+    <div className="dish-modal-main-container" onClick={onClose}>
+      <section
+        className="dish-modal-content"
+        onClick={(event) => event.stopPropagation()}
+      >
         <h1>This is Modal</h1>
 
-        <button onClick={onClose}>X</button>
+        <button onClick={onClose} className="dish-modal-close-btn">
+          X
+        </button>
         <div>{dish.dishName}</div>
       </section>
     </div>
