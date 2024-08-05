@@ -169,7 +169,7 @@ input:focus, input:not([value=""]) {
   border-radius: 0.5rem;
 
   width: 225px;
-  height: 500px;
+  height: 475px;
 
   transition: all 0.5s ease-in-out;
 
@@ -189,11 +189,8 @@ input:focus, input:not([value=""]) {
 
 /* RESTAURANT DETAIL */
 .restaurant-detail-main-container {
- /* border-right: 2px solid var(--border-color-hex);*/
-
   padding: 1.25rem;
   margin-top: 0.25rem;
- 
 }
 
 .restaurant-info-container {
@@ -208,34 +205,26 @@ input:focus, input:not([value=""]) {
 }
 
 .menu-main-container {
- 
   margin-top: 1.25rem;
-
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
   overflow: visible;
 }
 
 .dish-container {
   border: 2px solid var(--border-color-hex);
-
   border-radius: 0.5rem;
   display: flex;
   padding: 0.5rem;
   gap: 1rem;
-  
 }
 
 .dish-info-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-
 }
-
 
 .dish-name-desc-container {
   flex: 2;
@@ -246,40 +235,56 @@ input:focus, input:not([value=""]) {
   text-align: center;
 }
 
-/* DISH PAGE */
-.dish-modal-main-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .restaurant-card-container {
+    height: 365px;
+  }
+  .restaurant-address-container {
+    display: none;
+  }
 
+  .restaurant-info-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .restaurant-info-container img {
+    width: 100%;
+    height: auto;
+    max-width: 250px; /* Ensure it doesn't exceed the original size */
+  }
+
+  .restaurant-info-container div {
+    margin-top: 1rem; /* Add some space between the sections */
+  }
+
+  .restaurant-info-container ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .restaurant-info-container ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .dish-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dish-info-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dish-name-desc-container,
+  .dish-meal-price-container {
+    text-align: center;
+  }
 }
 
-.dish-modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 75%;
-  /* max-width: 500px; */
-  text-align: center;
-  position: relative;
-  border: 2px solid #125e23;
-  height: 350px;
-
-
-}
-
-.dish-modal-close-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-
-}
 
 
 

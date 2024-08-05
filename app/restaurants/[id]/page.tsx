@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 // Components
 import DishCard from "@/app/components/menu/DishCard";
 import Link from "next/link";
-import Modal from "@/app/components/Modal";
 
 export default function RestaurantPage({ params }: { params: { id: string } }) {
   const targetRestaurant = restaurants.filter((restaurant) => {
@@ -21,15 +20,10 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
 
   // here is pagination magic
   const [visibleDishes, setVisibleDishes] = useState(
-    targetRestaurant[0].menu.slice(0, 5)
+    targetRestaurant[0]?.menu.slice(0, 5)
   );
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(targetRestaurant[0].menu.length > 5);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  const [hasMore, setHasMore] = useState(targetRestaurant[0]?.menu.length > 5);
 
   const loadMore = () => {
     const newPage = page + 1;
@@ -91,20 +85,21 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
                 </ul>
               </div>
             </div>
+
+            {/* MENU DISH CONTAINER */}
+
             <div className="menu-main-container">
               {visibleDishes.map((dish) => {
                 return (
-                  <div
-                    key={dish._id}
-                    className="dish-container"
-                    onClick={toggleModal}
-                  >
+                  <div key={dish._id} className="dish-container">
                     <DishCard {...dish} />
-                    {isModalOpen && <Modal onClose={toggleModal} dish={dish} />}
                   </div>
                 );
               })}
               {hasMore && <button onClick={loadMore}>Load More</button>}
+              <button>
+                <Link href="/">Back to Restaurants</Link>
+              </button>
             </div>
           </div>
         );

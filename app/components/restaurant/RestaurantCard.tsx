@@ -24,7 +24,7 @@ export default function RestaurantCard(restaurant: IRestaurant) {
         <p className="mb-2">
           <i>{restaurant.tagline}</i>
         </p>
-        <article className="flex-col justify-center mb-2">
+        <article className="flex-col justify-center mb-2 restaurant-address-container">
           <h1>ADDRESS:</h1>
           <p>{restaurant.address.street}</p>
           <p>{restaurant.address.postalCode}</p>

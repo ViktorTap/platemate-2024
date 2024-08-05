@@ -18,6 +18,7 @@ export default function DishCard(dish: IDish) {
         alt="Dish icon"
         width={150}
         height={150}
+        className="rounded lg"
       />
 
       <section className="dish-info-container">
