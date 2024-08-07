@@ -5,20 +5,49 @@ import { IRestaurant } from "@/app/data/model/restaurant.model";
 // Interface
 interface CategoriesBarProps {
   setDisplayRestaurants: React.Dispatch<React.SetStateAction<IRestaurant[]>>;
+  allRestaurants: IRestaurant[];
 }
 
 // Minimalistic Design - Categories Bar
 export default function CategoriesBar({
   setDisplayRestaurants,
+  allRestaurants,
 }: CategoriesBarProps) {
+  const handleCategorySelectionClick = (category: string) => {
+    const filteredByCategory = allRestaurants.filter((restaurant) =>
+      restaurant.category.includes(category)
+    );
+
+    setDisplayRestaurants(filteredByCategory);
+  };
+
   return (
     <nav className="border-solid border-b-2 border-[#2f8c43]">
       <ul className="flex flex-wrap gap-y-1 justify-around items-baseline m-5">
-        <li>Category 1</li>
-        <li>Category 2</li>
-        <li>Category 3</li>
-        <li>Category 4</li>
-        <li>Category 5</li>
+        <button onClick={() => handleCategorySelectionClick("Hangry Helpers")}>
+          Hangry Helpers
+        </button>
+        <button onClick={() => handleCategorySelectionClick("Sweet Endings")}>
+          Sweet Endings
+        </button>
+        <button onClick={() => handleCategorySelectionClick("Soup-er Stars")}>
+          Soup-er Stars
+        </button>
+        <button
+          onClick={() => handleCategorySelectionClick("Vegetarian Ventures")}
+        >
+          Vegetarian Ventures
+        </button>
+        <button
+          onClick={() => handleCategorySelectionClick("International Intrigue")}
+        >
+          International Intrigue
+        </button>
+        <button
+          onClick={() => handleCategorySelectionClick("Adult Lunchables")}
+        >
+          Adult Lunchables
+        </button>
       </ul>
     </nav>
   );

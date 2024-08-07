@@ -2,15 +2,20 @@
 
 // Next
 import Link from "next/link";
+
 import { useSession, signOut } from "next-auth/react";
 
 export default function NavigationBar() {
   const { data: session, status } = useSession();
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <nav className="border-solid border-b-2 border-[#2f8c43]">
       <ul className="flex flex-wrap gap-y-1 justify-around items-baseline m-5">
-        <button className="basis-2/5">
+        <button className="basis-2/5" onClick={handleRefresh}>
           <Link href="/">Main Page</Link>
         </button>
 

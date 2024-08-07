@@ -16,6 +16,7 @@ import restaurants from "@/app/data/fake-data";
 import { IRestaurant } from "@/app/data/model/restaurant.model";
 
 export default function Home() {
+  const [allRestaurants] = useState(restaurants);
   const [displayRestaurants, setDisplayRestaurants] = useState<IRestaurant[]>(
     []
   );
@@ -23,12 +24,15 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setDisplayRestaurants(restaurants);
-    }, 1500);
+    }, 500);
   }, []);
 
   return (
     <main className="mt-5">
-      <CategoriesBar setDisplayRestaurants={setDisplayRestaurants} />
+      <CategoriesBar
+        allRestaurants={allRestaurants}
+        setDisplayRestaurants={setDisplayRestaurants}
+      />
       <SearchBar />
       {displayRestaurants.length > 0 ? (
         <RestaurantList restaurants={displayRestaurants} />
