@@ -172,12 +172,9 @@ input:focus, input:not([value=""]) {
   height: 475px;
 
   transition: all 0.5s ease-in-out;
-
-
 }
 
 .restaurant-card-container:hover {
-
   background-color: #2f8c43;
   transition: 0.5s ease-in-out;
   color: var(--background-primary-hex);
@@ -233,6 +230,23 @@ input:focus, input:not([value=""]) {
 .dish-meal-price-container {
   flex: 1;
   text-align: center;
+}
+
+/* CART */
+.main-cart-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  margin-top: 1.25rem;
+  gap: 1rem;
+
+  border: 2px solid var(--border-color-hex);
+  border-radius: 0.5rem;
+}
+
+.cart-item-container {
+  border-bottom: 2px solid var(--border-color-hex);
+  display: flex;
 }
 
 /* Responsive Design */

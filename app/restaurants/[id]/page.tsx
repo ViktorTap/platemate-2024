@@ -98,7 +98,7 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
               })}
               {hasMore && <button onClick={loadMore}>Load More</button>}
               <button>
-                <Link href="/">Back to Restaurants</Link>
+                <Link href="/">Back to All Restaurants</Link>
               </button>
             </div>
           </div>

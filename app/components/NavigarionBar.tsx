@@ -24,17 +24,23 @@ export default function NavigationBar() {
             <button className="basis-1/6">
               <Link href="/account/my">{session.user?.name}</Link>
             </button>
-            <button className="basis-1/6">
+            {/* <button className="basis-1/6">
               <Link href="/cart">Cart</Link>
-            </button>
+            </button> */}
             <button onClick={() => signOut({ callbackUrl: "/" })}>
               Sign Out
             </button>
           </>
         ) : (
-          <button className="basis-2/5">
-            <Link href="/account">Log In / Sign Up</Link>
-          </button>
+          <>
+            <Link href="/cart">
+              <button>Cart</button>
+            </Link>
+
+            <button className="basis-2/5">
+              <Link href="/account">Log In / Sign Up</Link>
+            </button>
+          </>
         )}
       </ul>
     </nav>
