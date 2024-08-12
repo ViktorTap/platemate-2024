@@ -32,29 +32,33 @@ export default function CartPage() {
         totalCartPrice += item.dishPrice * item.quantity;
         return (
           <section key={item.dish_id} className="cart-item-container">
-            <p>{item.dishName}</p>
             <Image
               src={item.dishImage}
               alt="Dish icon"
-              width={75}
-              height={75}
+              width={150}
+              height={150}
               className="rounded lg"
             />
+            <p>{item.dishName}</p>
             <Link href={item.restaurantUrl}>
               <button>{`Visit ${item.restaurantName}`}</button>
             </Link>
-            <div className="cart-quantity-container">
-              <button>-</button>
-              <p>{`Quantity: ${item.quantity}`}</p>
-              <button>+</button>
+            <div className="cart-pricing-container">
+              <p>{`Price: ${item.dishPrice}`}</p>
+              <div className="cart-quantity-container">
+                <button>-</button>
+                <p>{item.quantity}</p>
+                <button>+</button>
+              </div>
+
+              <p>{`Total: ${item.dishPrice * item.quantity}`}</p>
             </div>
-            <p>{`Price: ${item.dishPrice}`}</p>
-            <p>{`Total: ${item.dishPrice * item.quantity}`}</p>
           </section>
         );
       })}
       <section className="cart-total-order-container">
-        <p>Total price for whole cart: {totalCartPrice}</p>
+        <p>Total price for cart:</p>
+        <p>{totalCartPrice}</p>
         <button>ORDER</button>
       </section>
     </main>

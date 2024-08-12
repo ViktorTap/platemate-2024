@@ -236,6 +236,7 @@ input:focus, input:not([value=""]) {
 .main-cart-container {
   display: flex;
   flex-direction: column;
+  
   padding: 0.5rem;
   margin-top: 1.25rem;
   gap: 1rem;
@@ -247,7 +248,38 @@ input:focus, input:not([value=""]) {
 .cart-item-container {
   border-bottom: 2px solid var(--border-color-hex);
   display: flex;
+  padding: 0.5rem;
+  justify-content: space-around;
 }
+
+.cart-pricing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.cart-quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.cart-quantity-container p{
+  margin: 0px 5px 0px 5px;
+}
+
+.cart-total-order-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-end;
+  gap: 5px;
+  margin-right: 2.35rem;
+}
+
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
