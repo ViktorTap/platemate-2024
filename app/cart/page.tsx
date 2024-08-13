@@ -10,9 +10,16 @@ import Link from "next/link";
 // React
 import { useState } from "react";
 
+import CartCard from "../components/cart/CartCard";
+
 export default function CartPage() {
   const { data: session, status } = useSession();
+
+  // CART ITEMS
   const [currentCart, setCurrentCart] = useState(cart);
+
+  // CART TOTAL PRICE CALCULATIONS
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
   // if (status === "loading") {
   //   return <div>Loading...</div>;
@@ -28,34 +35,11 @@ export default function CartPage() {
       {/* <p>Email: {session.user?.email}</p>
       <p>session name: {session.user?.name}</p> */}
 
-      {cart.map((item) => {
+      {currentCart.map((item) => {
         totalCartPrice += item.dishPrice * item.quantity;
-        return (
-          <section key={item.dish_id} className="cart-item-container">
-            <Image
-              src={item.dishImage}
-              alt="Dish icon"
-              width={150}
-              height={150}
-              className="rounded lg"
-            />
-            <p>{item.dishName}</p>
-            <Link href={item.restaurantUrl}>
-              <button>{`Visit ${item.restaurantName}`}</button>
-            </Link>
-            <div className="cart-pricing-container">
-              <p>{`Price: ${item.dishPrice}`}</p>
-              <div className="cart-quantity-container">
-                <button>-</button>
-                <p>{item.quantity}</p>
-                <button>+</button>
-              </div>
-
-              <p>{`Total: ${item.dishPrice * item.quantity}`}</p>
-            </div>
-          </section>
-        );
+        return <CartCard key={item.dish_id} {...item} />;
       })}
+
       <section className="cart-total-order-container">
         <p>Total price for cart:</p>
         <p>{totalCartPrice}</p>

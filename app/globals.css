@@ -250,6 +250,14 @@ input:focus, input:not([value=""]) {
   display: flex;
   padding: 0.5rem;
   justify-content: space-around;
+  position: relative;
+}
+
+.cart-item-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
 }
 
 .cart-pricing-container {
