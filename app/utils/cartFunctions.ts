@@ -1,6 +1,8 @@
 // add
 // update
 
+import { cart } from "../data/fake-cart";
+
 interface ICart {
   dish_id: string;
   dishName: string;
@@ -13,21 +15,24 @@ interface ICart {
 }
 
 // DELETE
-function deleteCartItemById(cartItems: ICart[], id: string): ICart[] {
-  const filteredCartItems = cartItems.filter((item) => item.dish_id != id);
+function deleteCartItemById(id: string): ICart[] {
+  const filteredCartItems = cart.filter((item) => item.dish_id != id);
   return filteredCartItems;
 }
 
 // UPDATE
 function updateCartItemById(
-  cartItems: ICart[],
   id: string,
   updatedData: Partial<ICart>
 ): ICart | string {
-  const foundItem = cartItems.find((item) => item.dish_id === id);
+  // Find cart item by ID
+  const foundItem = cart.find((item) => item.dish_id === id);
 
   if (foundItem) {
+    // If found, update the item's properties
     Object.assign(foundItem, updatedData);
+
+    // updateCartItemById(cartItems, '1', { quantity: 3, dishPrice: 16 });
   }
   return foundItem ? foundItem : "Did not find this item!";
 }

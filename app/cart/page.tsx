@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import CartCard from "../components/cart/CartCard";
 
@@ -28,7 +28,15 @@ export default function CartPage() {
   // if (!session) {
   //   return <div>You are not logged in. please log in to view your profile</div>;
   // }
-  let totalCartPrice = 0;
+
+  useEffect(() => {
+    const totalPrice = currentCart.reduce(
+      (total, item) => total + item.quantity * item.dishPrice,
+      0
+    );
+    console.log(totalPrice);
+    setCartTotalPrice(totalPrice);
+  }, [currentCart]);
 
   return (
     <main className="main-cart-container">
@@ -36,13 +44,20 @@ export default function CartPage() {
       <p>session name: {session.user?.name}</p> */}
 
       {currentCart.map((item) => {
-        totalCartPrice += item.dishPrice * item.quantity;
-        return <CartCard key={item.dish_id} {...item} />;
+        return (
+          <CartCard
+            key={item.dish_id}
+            cart={item}
+            cartTotalPrice={cartTotalPrice}
+            setCartTotalPrice={setCartTotalPrice}
+          />
+        );
       })}
 
       <section className="cart-total-order-container">
         <p>Total price for cart:</p>
-        <p>{totalCartPrice}</p>
+        <p>{cartTotalPrice.toFixed(2)}</p>
+
         <button>ORDER</button>
       </section>
     </main>

@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   deleteCartItemById,
@@ -18,7 +20,17 @@ interface ICart {
   dishPrice: number;
 }
 
-export default function CartCard(cart: ICart) {
+interface ICartCardProps {
+  cart: ICart;
+  setCartTotalPrice: any;
+  cartTotalPrice: any;
+}
+
+export default function CartCard({
+  cart,
+  setCartTotalPrice,
+  cartTotalPrice,
+}: ICartCardProps) {
   // CART ITEM CALCULATIONS
   const [cartItemPrice, setCartItemPrice] = useState(cart.dishPrice);
   const [cartItemQuantity, setCartItemQuantity] = useState(cart.quantity);
@@ -26,7 +38,32 @@ export default function CartCard(cart: ICart) {
     cartItemPrice * cartItemQuantity
   );
 
+  useEffect(() => {
+    setCartItemTotalPrice(cartItemPrice * cartItemQuantity);
+    setCartTotalPrice(cartTotalPrice + cartItemTotalPrice);
+  }, [cartItemQuantity]);
+
   // ADD QUANTITY
+  const handleAddQuantity = (id: string) => {
+    const newQuantity = cartItemQuantity + 1;
+
+    updateCartItemById(id, {
+      quantity: newQuantity,
+    });
+
+    setCartItemQuantity(newQuantity);
+  };
+
+  // SUBTRACT QUANTITY
+  const handleSubtractQuantity = (id: string) => {
+    const newQuantity = cartItemQuantity - 1;
+
+    updateCartItemById(id, {
+      quantity: newQuantity,
+    });
+
+    setCartItemQuantity(newQuantity);
+  };
   // DELETE
 
   return (
@@ -46,12 +83,14 @@ export default function CartCard(cart: ICart) {
       <div className="cart-pricing-container">
         <p>{`Price: ${cartItemPrice}`}</p>
         <div className="cart-quantity-container">
-          <button>-</button>
+          <button onClick={() => handleSubtractQuantity(cart.dish_id)}>
+            -
+          </button>
           <p>{cartItemQuantity}</p>
-          <button>+</button>
+          <button onClick={() => handleAddQuantity(cart.dish_id)}>+</button>
         </div>
 
-        <p>{`Total: ${cartItemTotalPrice}`}</p>
+        <p>{`Total: ${cartItemTotalPrice.toFixed(2)}`}</p>
       </div>
     </section>
   );
