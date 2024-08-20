@@ -4,6 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+// import React, { Dispatch, SetStateAction } from 'react';
+
+import { HiOutlineTrash, HiTrash } from "react-icons/hi";
+
 import {
   deleteCartItemById,
   updateCartItemById,
@@ -24,12 +28,16 @@ interface ICartCardProps {
   cart: ICart;
   setCartTotalPrice: any;
   cartTotalPrice: any;
+  currentCart: any;
+  setCurrentCart: any;
 }
 
 export default function CartCard({
   cart,
   setCartTotalPrice,
   cartTotalPrice,
+  currentCart,
+  setCurrentCart,
 }: ICartCardProps) {
   // CART ITEM CALCULATIONS
   const [cartItemPrice, setCartItemPrice] = useState(cart.dishPrice);
@@ -37,6 +45,9 @@ export default function CartCard({
   const [cartItemTotalPrice, setCartItemTotalPrice] = useState(
     cartItemPrice * cartItemQuantity
   );
+
+  // icon hovered swap
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     setCartItemTotalPrice(cartItemPrice * cartItemQuantity);
@@ -52,6 +63,14 @@ export default function CartCard({
     });
 
     setCartItemQuantity(newQuantity);
+
+    // updating state
+    setCurrentCart((currentCart: any) => {
+      const updatedCart = currentCart.map((item: any) =>
+        item.dish_id === id ? { ...item, quantity: newQuantity } : item
+      );
+      return updatedCart;
+    });
   };
 
   // SUBTRACT QUANTITY
@@ -63,34 +82,64 @@ export default function CartCard({
     });
 
     setCartItemQuantity(newQuantity);
+
+    // updating state
+    setCurrentCart((currentCart: any) => {
+      const updatedCart = currentCart.map((item: any) =>
+        item.dish_id === id ? { ...item, quantity: newQuantity } : item
+      );
+      return updatedCart;
+    });
   };
   // DELETE
+  const handleDeleteCartItem = (id: string) => {
+    // updating state
+    setCurrentCart((currentCart: any) => {
+      const updatedCart = currentCart.filter((item: any) => item.dish_id != id);
+      return updatedCart;
+    });
+  };
 
   return (
     <section className="cart-item-container">
-      <p className="cart-item-delete">X</p>
-      <Image
-        src={cart.dishImage}
-        alt="Dish icon"
-        width={150}
-        height={150}
-        className="rounded lg"
-      />
-      <p>{cart.dishName}</p>
-      <Link href={cart.restaurantUrl}>
-        <button>{`Visit ${cart.restaurantName}`}</button>
-      </Link>
-      <div className="cart-pricing-container">
-        <p>{`Price: ${cartItemPrice}`}</p>
-        <div className="cart-quantity-container">
-          <button onClick={() => handleSubtractQuantity(cart.dish_id)}>
-            -
-          </button>
-          <p>{cartItemQuantity}</p>
-          <button onClick={() => handleAddQuantity(cart.dish_id)}>+</button>
-        </div>
+      <p
+        className="cart-item-delete"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => handleDeleteCartItem(cart.dish_id)}
+      >
+        {isHovered ? <HiTrash size={24} /> : <HiOutlineTrash size={24} />}
+      </p>
+      <div className="cart-item-image-description">
+        <Image
+          src={cart.dishImage}
+          alt="Dish icon"
+          width={150}
+          height={150}
+          className="rounded lg"
+        />
+        <div className="cart-item-name-description">
+          <p>{cart.dishName}</p>
+          <p>{cart.description}</p>
+          <div className="cart-pricing-container">
+            <Link href={cart.restaurantUrl}>
+              <button>{`Visit ${cart.restaurantName}`}</button>
+            </Link>
 
-        <p>{`Total: ${cartItemTotalPrice.toFixed(2)}`}</p>
+            <div className="cart-quantity-container">
+              <p>{`Price: ${cartItemPrice}`}</p>
+              <button
+                onClick={() => handleSubtractQuantity(cart.dish_id)}
+                disabled={cartItemQuantity <= 1}
+              >
+                -
+              </button>
+              <p>{cartItemQuantity}</p>
+              <button onClick={() => handleAddQuantity(cart.dish_id)}>+</button>
+              <p>{`Total: ${cartItemTotalPrice.toFixed(2)}`}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -50,10 +50,12 @@ export default function CartPage() {
             cart={item}
             cartTotalPrice={cartTotalPrice}
             setCartTotalPrice={setCartTotalPrice}
+            currentCart={currentCart}
+            setCurrentCart={setCurrentCart}
           />
         );
       })}
-
+      {currentCart.length <= 0 && "Cart is Empty"}
       <section className="cart-total-order-container">
         <p>Total price for cart:</p>
         <p>{cartTotalPrice.toFixed(2)}</p>

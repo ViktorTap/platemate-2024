@@ -251,6 +251,15 @@ input:focus, input:not([value=""]) {
   padding: 0.5rem;
   justify-content: space-around;
   position: relative;
+  flex-wrap: wrap; 
+}
+.cart-item-image-description {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item-name-description {
+  text-align: center;
 }
 
 .cart-item-delete {
@@ -258,14 +267,18 @@ input:focus, input:not([value=""]) {
   right: 0;
   top: 0;
   margin: 0.5rem;
+  cursor: pointer;
 }
 
 .cart-pricing-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items:center;
   justify-content: center;
+  text-align: center;
   gap: 5px;
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .cart-quantity-container {
@@ -306,11 +319,11 @@ input:focus, input:not([value=""]) {
   .restaurant-info-container img {
     width: 100%;
     height: auto;
-    max-width: 250px; /* Ensure it doesn't exceed the original size */
+    max-width: 250px; 
   }
 
   .restaurant-info-container div {
-    margin-top: 1rem; /* Add some space between the sections */
+    margin-top: 1rem; 
   }
 
   .restaurant-info-container ul {
@@ -336,6 +349,54 @@ input:focus, input:not([value=""]) {
   .dish-name-desc-container,
   .dish-meal-price-container {
     text-align: center;
+  }
+
+  /* CART */
+  .cart-item-container {
+    flex-direction: column; 
+    align-items: center;
+    padding: 1rem; 
+    border-bottom: none; 
+    border: 2px solid var(--border-color-hex); 
+    border-radius: 0.5rem; 
+    margin-bottom: 1rem; 
+  }
+
+  .cart-item-image-description {
+    flex-direction: column; 
+    text-align: center; 
+  }
+
+  .cart-item-name-description {
+    margin-top: 0.5rem; 
+  }
+
+  .cart-item-delete {
+    position: relative; 
+    top: auto;
+    right: auto;
+    margin: 0;
+    align-self: flex-end; 
+  }
+
+  .cart-pricing-container {
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px;
+    padding: 1rem; 
+  }
+
+  .cart-quantity-container {
+    justify-content: center; 
+    width: 100%;
+    margin-bottom: 1rem; 
+  }
+
+  .cart-total-order-container {
+    align-self: center; 
+    margin-right: 0; 
+    width: 100%; 
+    margin-top: 1rem; 
   }
 }
 
