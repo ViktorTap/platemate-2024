@@ -1,6 +1,5 @@
 "use client";
 // Skeleton with information
-import { cart } from "../data/fake-cart";
 
 // NextAuth
 import { useSession } from "next-auth/react";
@@ -16,7 +15,8 @@ export default function CartPage() {
   const { data: session, status } = useSession();
 
   // CART ITEMS
-  const [currentCart, setCurrentCart] = useState(cart);
+  const [currentCart, setCurrentCart] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // CART TOTAL PRICE CALCULATIONS
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
@@ -30,13 +30,28 @@ export default function CartPage() {
   // }
 
   useEffect(() => {
-    const totalPrice = currentCart.reduce(
-      (total, item) => total + item.quantity * item.dishPrice,
-      0
-    );
-    console.log(totalPrice);
-    setCartTotalPrice(totalPrice);
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:3001/cart");
+        const result = await response.json();
+        setCurrentCart(result);
+
+        const totalPrice = currentCart.reduce(
+          (total, item) => total + item?.quantity * item?.dishPrice,
+          0
+        );
+        setCartTotalPrice(totalPrice);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, [currentCart]);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <main className="main-cart-container">

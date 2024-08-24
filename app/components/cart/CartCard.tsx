@@ -92,12 +92,22 @@ export default function CartCard({
     });
   };
   // DELETE
-  const handleDeleteCartItem = (id: string) => {
+  const handleDeleteCartItem = async (id: string) => {
     // updating state
-    setCurrentCart((currentCart: any) => {
-      const updatedCart = currentCart.filter((item: any) => item.dish_id != id);
-      return updatedCart;
-    });
+    // setCurrentCart((currentCart: any) => {
+    //   const updatedCart = currentCart.filter((item: any) => item.dish_id != id);
+    //   return updatedCart;
+    // });
+
+    try {
+      await fetch(`http://localhost:3001/cart/${id}`, {
+        method: "DELETE",
+      });
+
+      setCurrentCart(currentCart.filter((item) => item.dish_id !== id));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
   };
 
   return (
