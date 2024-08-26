@@ -30,26 +30,28 @@ export default function CartPage() {
   // }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("http://localhost:3001/cart");
-        const result = await response.json();
-        setCurrentCart(result);
-
-        const totalPrice = currentCart.reduce(
-          (total, item) => total + item?.quantity * item?.dishPrice,
-          0
-        );
-        setCartTotalPrice(totalPrice);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     fetchData();
-  }, [currentCart]);
+  }, [cartTotalPrice]);
+
+  async function fetchData() {
+    try {
+      const response = await fetch("http://localhost:3001/cart");
+      const result = await response.json();
+
+      setCurrentCart(result);
+
+      const totalPrice = result.reduce(
+        (total: any, item: any) => total + item?.quantity * item?.dishPrice,
+        0
+      );
+
+      setCartTotalPrice(totalPrice);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   if (loading) return <div>Loading...</div>;
 

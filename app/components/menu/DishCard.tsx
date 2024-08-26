@@ -1,6 +1,8 @@
+"use client";
 // Next
 import Image from "next/image";
 
+import { useState } from "react";
 interface IDish {
   _id: string;
   dishName: string;
@@ -11,6 +13,21 @@ interface IDish {
 }
 
 export default function DishCard(dish: IDish) {
+  const [currentOrderDishQuantity, setCurrentOrderDishQuantity] = useState(0);
+  const [currendDishTotalPrice, setCurrentDishTotalPrice] = useState(
+    dish.price * currentOrderDishQuantity
+  );
+  const [currentOrderDish, setCurrentOrderDish] = useState({
+    _id: dish._id,
+    dishName: dish.dishName,
+    description: dish.description,
+    price: dish.price,
+    image: dish.image,
+    quantity: currentOrderDishQuantity,
+    restaurantName: "restaurant name",
+    restaurantUrl: "/restauranturl",
+  });
+
   return (
     <>
       <Image
@@ -37,6 +54,27 @@ export default function DishCard(dish: IDish) {
           <p className="mt-0.5">
             <strong>{dish.price} €</strong>
           </p>
+          <div className="dish-card-quantity-contaner">
+            <button
+              onClick={() =>
+                setCurrentOrderDishQuantity(currentOrderDishQuantity - 1)
+              }
+              disabled={currentOrderDishQuantity === 0}
+            >
+              -
+            </button>
+            {currentOrderDishQuantity}
+            <button
+              onClick={() =>
+                setCurrentOrderDishQuantity(currentOrderDishQuantity + 1)
+              }
+              disabled={currentOrderDishQuantity === 10}
+            >
+              +
+            </button>
+          </div>
+          <p>{currendDishTotalPrice}</p>
+          <button>ADD</button>
         </article>
       </section>
     </>

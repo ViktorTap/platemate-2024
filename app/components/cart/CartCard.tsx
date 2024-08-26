@@ -55,41 +55,65 @@ export default function CartCard({
   }, [cartItemQuantity]);
 
   // ADD QUANTITY
-  const handleAddQuantity = (id: string) => {
+  const handleAddQuantity = async (id: string) => {
     const newQuantity = cartItemQuantity + 1;
-
-    updateCartItemById(id, {
-      quantity: newQuantity,
-    });
 
     setCartItemQuantity(newQuantity);
 
-    // updating state
-    setCurrentCart((currentCart: any) => {
-      const updatedCart = currentCart.map((item: any) =>
-        item.dish_id === id ? { ...item, quantity: newQuantity } : item
-      );
-      return updatedCart;
-    });
+    try {
+      const response = await fetch(`http://localhost:3001/cart/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quantity: newQuantity }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update dish quantity");
+      }
+
+      // Updating State
+      // setCurrentCart((currentCart: any) => {
+      //   const updatedCart = currentCart.map((item: any) =>
+      //     item.dish_id === id ? { ...item, quantity: newQuantity } : item
+      //   );
+      //   return updatedCart;
+      // });
+    } catch (error) {
+      console.error("Error updating dish quantity:", error);
+    }
   };
 
   // SUBTRACT QUANTITY
-  const handleSubtractQuantity = (id: string) => {
+  const handleSubtractQuantity = async (id: string) => {
     const newQuantity = cartItemQuantity - 1;
-
-    updateCartItemById(id, {
-      quantity: newQuantity,
-    });
 
     setCartItemQuantity(newQuantity);
 
     // updating state
-    setCurrentCart((currentCart: any) => {
-      const updatedCart = currentCart.map((item: any) =>
-        item.dish_id === id ? { ...item, quantity: newQuantity } : item
-      );
-      return updatedCart;
-    });
+
+    const updatedCart = currentCart.map((item: any) =>
+      item.dish_id === id ? { ...item, quantity: newQuantity } : item
+    );
+
+    setCurrentCart(updatedCart);
+
+    try {
+      const response = await fetch(`http://localhost:3001/cart/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quantity: newQuantity }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update dish quantity");
+      }
+    } catch (error) {
+      console.error("Error updating dish quantity:", error);
+    }
   };
   // DELETE
   const handleDeleteCartItem = async (id: string) => {
@@ -104,7 +128,7 @@ export default function CartCard({
         method: "DELETE",
       });
 
-      setCurrentCart(currentCart.filter((item) => item.dish_id !== id));
+      setCurrentCart(currentCart.filter((item: any) => item.dish_id !== id));
     } catch (error) {
       console.error("Error deleting post:", error);
     }
