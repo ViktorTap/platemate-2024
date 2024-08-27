@@ -2,7 +2,10 @@
 // Next
 import Image from "next/image";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface IDish {
   _id: string;
   dishName: string;
@@ -18,15 +21,78 @@ export default function DishCard(dish: IDish) {
     dish.price * currentOrderDishQuantity
   );
   const [currentOrderDish, setCurrentOrderDish] = useState({
-    _id: dish._id,
+    dish_id: dish._id,
     dishName: dish.dishName,
-    description: dish.description,
-    price: dish.price,
-    image: dish.image,
+    dishImage: dish.image,
     quantity: currentOrderDishQuantity,
+    description: dish.description,
     restaurantName: "restaurant name",
     restaurantUrl: "/restauranturl",
+    dishPrice: dish.price,
   });
+
+  useEffect(() => {
+    isInCart(dish._id);
+    const newPrice = dish.price * currentOrderDishQuantity;
+    setCurrentDishTotalPrice(newPrice);
+    setCurrentOrderDish({
+      ...currentOrderDish,
+      quantity: currentOrderDishQuantity,
+    });
+  }, [currentOrderDishQuantity]);
+
+  const isInCart = async (id: any) => {
+    try {
+      const response = await fetch(`http://localhost:3001/cart/${id}`);
+
+      if (response) {
+        const json = await response.json();
+        console.log(json.quantity);
+        if (json.quantity >= 0) {
+          const newQuantity = json.quantity;
+          setCurrentOrderDishQuantity(newQuantity);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddOrSubtract = (calculation: any) => {
+    calculation === "-"
+      ? setCurrentOrderDishQuantity(currentOrderDishQuantity - 1)
+      : setCurrentOrderDishQuantity(currentOrderDishQuantity + 1);
+  };
+
+  const itemsAddedIntoTheCart = () => {
+    toast.success("🦄 Wow so easy!", {
+      autoClose: 3000,
+    });
+  };
+
+  const someItemAreInYourCart = () => {
+    toast.success("You already have some items in the cart!", {
+      autoClose: 3000,
+    });
+  };
+
+  const addDishToCart = async (event: any) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3001/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(currentOrderDish),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    itemsAddedIntoTheCart();
+    setCurrentOrderDishQuantity(0);
+  };
 
   return (
     <>
@@ -56,25 +122,26 @@ export default function DishCard(dish: IDish) {
           </p>
           <div className="dish-card-quantity-contaner">
             <button
-              onClick={() =>
-                setCurrentOrderDishQuantity(currentOrderDishQuantity - 1)
-              }
+              onClick={() => handleAddOrSubtract("-")}
               disabled={currentOrderDishQuantity === 0}
             >
               -
             </button>
             {currentOrderDishQuantity}
             <button
-              onClick={() =>
-                setCurrentOrderDishQuantity(currentOrderDishQuantity + 1)
-              }
+              onClick={() => handleAddOrSubtract("+")}
               disabled={currentOrderDishQuantity === 10}
             >
               +
             </button>
           </div>
           <p>{currendDishTotalPrice}</p>
-          <button>ADD</button>
+          <button
+            onClick={(event) => addDishToCart(event)}
+            disabled={currentOrderDishQuantity === 0}
+          >
+            ADD
+          </button>
         </article>
       </section>
     </>

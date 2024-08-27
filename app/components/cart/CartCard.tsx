@@ -146,7 +146,11 @@ export default function CartCard({
       </p>
       <div className="cart-item-image-description">
         <Image
-          src={cart.dishImage}
+          src={
+            cart.dishImage !== ""
+              ? cart.dishImage
+              : "/dishes/default-dish-icon.jpg"
+          }
           alt="Dish icon"
           width={150}
           height={150}

@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 // Components
 import DishCard from "@/app/components/menu/DishCard";
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
 
 export default function RestaurantPage({ params }: { params: { id: string } }) {
   const targetRestaurant = restaurants.filter((restaurant) => {
@@ -93,6 +94,15 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
                 return (
                   <div key={dish._id} className="dish-container">
                     <DishCard {...dish} />
+                    <ToastContainer
+                      position="bottom-center"
+                      autoClose={3000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      rtl={false}
+                      draggable
+                      theme="light"
+                    />
                   </div>
                 );
               })}

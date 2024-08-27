@@ -8,6 +8,9 @@ import { Inter } from "next/font/google";
 import NavigationBar from "./components/NavigarionBar";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
 
+// Toastify
+import { Bounce, ToastContainer } from "react-toastify";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
