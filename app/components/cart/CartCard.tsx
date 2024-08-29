@@ -4,14 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-// import React, { Dispatch, SetStateAction } from 'react';
-
 import { HiOutlineTrash, HiTrash } from "react-icons/hi";
-
-import {
-  deleteCartItemById,
-  updateCartItemById,
-} from "@/app/utils/cartFunctions";
 
 interface ICart {
   dish_id: string;
@@ -72,14 +65,6 @@ export default function CartCard({
       if (!response.ok) {
         throw new Error("Failed to update dish quantity");
       }
-
-      // Updating State
-      // setCurrentCart((currentCart: any) => {
-      //   const updatedCart = currentCart.map((item: any) =>
-      //     item.dish_id === id ? { ...item, quantity: newQuantity } : item
-      //   );
-      //   return updatedCart;
-      // });
     } catch (error) {
       console.error("Error updating dish quantity:", error);
     }
@@ -90,8 +75,6 @@ export default function CartCard({
     const newQuantity = cartItemQuantity - 1;
 
     setCartItemQuantity(newQuantity);
-
-    // updating state
 
     const updatedCart = currentCart.map((item: any) =>
       item.dish_id === id ? { ...item, quantity: newQuantity } : item
@@ -117,18 +100,13 @@ export default function CartCard({
   };
   // DELETE
   const handleDeleteCartItem = async (id: string) => {
-    // updating state
-    // setCurrentCart((currentCart: any) => {
-    //   const updatedCart = currentCart.filter((item: any) => item.dish_id != id);
-    //   return updatedCart;
-    // });
-
     try {
       await fetch(`http://localhost:3001/cart/${id}`, {
         method: "DELETE",
       });
 
       setCurrentCart(currentCart.filter((item: any) => item.dish_id !== id));
+      setCartTotalPrice(cartTotalPrice - cartItemTotalPrice);
     } catch (error) {
       console.error("Error deleting post:", error);
     }

@@ -32,7 +32,6 @@ export default function DishCard(dish: IDish) {
   });
 
   useEffect(() => {
-    isInCart(dish._id);
     const newPrice = dish.price * currentOrderDishQuantity;
     setCurrentDishTotalPrice(newPrice);
     setCurrentOrderDish({
@@ -40,23 +39,6 @@ export default function DishCard(dish: IDish) {
       quantity: currentOrderDishQuantity,
     });
   }, [currentOrderDishQuantity]);
-
-  const isInCart = async (id: any) => {
-    try {
-      const response = await fetch(`http://localhost:3001/cart/${id}`);
-
-      if (response) {
-        const json = await response.json();
-        console.log(json.quantity);
-        if (json.quantity >= 0) {
-          const newQuantity = json.quantity;
-          setCurrentOrderDishQuantity(newQuantity);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleAddOrSubtract = (calculation: any) => {
     calculation === "-"
@@ -71,26 +53,47 @@ export default function DishCard(dish: IDish) {
   };
 
   const someItemAreInYourCart = () => {
-    toast.success("You already have some items in the cart!", {
-      autoClose: 3000,
-    });
+    toast.success(
+      "You already have this item in the cart, we updatet quantity :)",
+      {
+        autoClose: 3000,
+      }
+    );
   };
 
   const addDishToCart = async (event: any) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(currentOrderDish),
-      });
+      const response = await fetch(`http://localhost:3001/cart/${dish._id}`);
+      const dishExists = response.status === 200;
+
+      if (dishExists) {
+        const json = await response.json();
+        await fetch(`http://localhost:3001/cart/${dish._id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            quantity: json.quantity + currentOrderDishQuantity,
+          }),
+        });
+        someItemAreInYourCart();
+      } else {
+        await fetch("http://localhost:3001/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentOrderDish),
+        });
+        itemsAddedIntoTheCart();
+      }
     } catch (error) {
       console.log(error);
     }
-    itemsAddedIntoTheCart();
+
     setCurrentOrderDishQuantity(0);
   };
 
