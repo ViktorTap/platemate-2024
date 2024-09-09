@@ -15,7 +15,13 @@ interface IDish {
   image: string;
 }
 
-export default function DishCard(dish: IDish) {
+interface DishCardProps extends IDish {
+  restID: string;
+}
+
+export default function DishCard(dish: DishCardProps) {
+  const { restID, _id, dishName, description, price, meal, image } = dish;
+
   const [currentOrderDishQuantity, setCurrentOrderDishQuantity] = useState(0);
   const [currendDishTotalPrice, setCurrentDishTotalPrice] = useState(
     dish.price * currentOrderDishQuantity
@@ -27,7 +33,7 @@ export default function DishCard(dish: IDish) {
     quantity: currentOrderDishQuantity,
     description: dish.description,
     restaurantName: "restaurant name",
-    restaurantUrl: "/restauranturl",
+    restaurantUrl: `/restaurants/${dish.restID}`,
     dishPrice: dish.price,
   });
 
@@ -47,14 +53,14 @@ export default function DishCard(dish: IDish) {
   };
 
   const itemsAddedIntoTheCart = () => {
-    toast.success("🦄 Wow so easy!", {
+    toast.success("Item added to your Cart :)", {
       autoClose: 3000,
     });
   };
 
   const someItemAreInYourCart = () => {
     toast.success(
-      "You already have this item in the cart, we updatet quantity :)",
+      "You already have this item in the cart, we updated quantity :)",
       {
         autoClose: 3000,
       }
@@ -138,7 +144,7 @@ export default function DishCard(dish: IDish) {
               +
             </button>
           </div>
-          <p>{currendDishTotalPrice}</p>
+          <p>{currendDishTotalPrice.toFixed(2)}</p>
           <button
             onClick={(event) => addDishToCart(event)}
             disabled={currentOrderDishQuantity === 0}

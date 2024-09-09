@@ -21,6 +21,8 @@ export default function CartPage() {
   // CART TOTAL PRICE CALCULATIONS
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
+  // ORDER
+
   // if (status === "loading") {
   //   return <div>Loading...</div>;
   // }

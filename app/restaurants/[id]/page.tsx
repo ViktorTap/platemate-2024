@@ -11,13 +11,12 @@ import { useState, useEffect } from "react";
 import DishCard from "@/app/components/menu/DishCard";
 import Link from "next/link";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RestaurantPage({ params }: { params: { id: string } }) {
   const targetRestaurant = restaurants.filter((restaurant) => {
     return restaurant && restaurant._id === params.id;
   });
-
-  console.log(params);
 
   // here is pagination magic
   const [visibleDishes, setVisibleDishes] = useState(
@@ -38,6 +37,15 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
 
   return (
     <main>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        draggable
+        theme="light"
+      />
       {targetRestaurant.map((rest) => {
         return (
           <div key={rest._id} className="restaurant-detail-main-container">
@@ -93,16 +101,7 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
               {visibleDishes.map((dish) => {
                 return (
                   <div key={dish._id} className="dish-container">
-                    <DishCard {...dish} />
-                    <ToastContainer
-                      position="bottom-center"
-                      autoClose={3000}
-                      hideProgressBar={false}
-                      newestOnTop={false}
-                      rtl={false}
-                      draggable
-                      theme="light"
-                    />
+                    <DishCard {...dish} restID={params.id} />
                   </div>
                 );
               })}

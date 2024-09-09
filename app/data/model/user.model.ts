@@ -43,12 +43,11 @@ const userSchema = new mongoose.Schema<IUser>({
   // ],
   // orderHistory: [
   //   {
-  //     order: {
   //       _id: mongoose.Types.ObjectId,
   //       dishes: [String],
   //       quantity: [Number],
+  //       dishPrice: [Number],
   //       totalPrice: Number,
-  //     },
   //     created: {
   //       type: Date,
   //       default: Date.now,
