@@ -49,6 +49,71 @@
       "restaurantName": "restaurant name",
       "restaurantUrl": "/restaurants/3",
       "dishPrice": 14.99
+    },
+    {
+      "dish_id": "d1",
+      "dishName": "Breakfast Helper Hero",
+      "dishImage": "/dishes/bur-001.jpeg",
+      "quantity": 1,
+      "description": "Scrambled eggs, bacon, sausage, cheese, hash browns, all wrapped up in a warm flour tortilla. This monster will banish your hanger faster than you can say 'breakfast burrito.'",
+      "restaurantName": "Restix",
+      "restaurantUrl": "/restaurants/1",
+      "dishPrice": 8.99
+    }
+  ],
+  "orderHistory": [
+    {
+      "dish_id": "1",
+      "dishes": [
+        "Dish One",
+        "Dish Two",
+        "Dish Three"
+      ],
+      "quantity": [
+        3,
+        2,
+        1
+      ],
+      "dishPrice": [
+        15.9,
+        10,
+        25
+      ],
+      "totalPrice": 92.7,
+      "created": {
+        "default": "12.08.2024"
+      }
+    },
+    {
+      "dish_id": 2,
+      "dishes": [
+        "Bla Bla Two",
+        "Labamba One",
+        "S'mores Ain't the Only Flame Broiled Delight",
+        "Classic Cheeseburger with Fries",
+        "Butter Chicken",
+        "Breakfast Helper Hero"
+      ],
+      "quantity": [
+        3,
+        3,
+        6,
+        5,
+        3,
+        1
+      ],
+      "dishPrice": [
+        25,
+        30.5,
+        5.99,
+        11.49,
+        14.99,
+        8.99
+      ],
+      "totalPrice": 313.85,
+      "created": {
+        "default": "11/09/2024"
+      }
     }
   ]
 }

@@ -17,10 +17,12 @@ interface IDish {
 
 interface DishCardProps extends IDish {
   restID: string;
+  restName: string;
 }
 
 export default function DishCard(dish: DishCardProps) {
-  const { restID, _id, dishName, description, price, meal, image } = dish;
+  const { restID, restName, _id, dishName, description, price, meal, image } =
+    dish;
 
   const [currentOrderDishQuantity, setCurrentOrderDishQuantity] = useState(0);
   const [currendDishTotalPrice, setCurrentDishTotalPrice] = useState(
@@ -32,7 +34,7 @@ export default function DishCard(dish: DishCardProps) {
     dishImage: dish.image,
     quantity: currentOrderDishQuantity,
     description: dish.description,
-    restaurantName: "restaurant name",
+    restaurantName: `${restName}`,
     restaurantUrl: `/restaurants/${dish.restID}`,
     dishPrice: dish.price,
   });

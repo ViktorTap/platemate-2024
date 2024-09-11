@@ -23,6 +23,46 @@ export default function CartPage() {
 
   // ORDER
 
+  const submitOrder = async (event: any) => {
+    event.preventDefault();
+
+    try {
+      const order = {
+        dish_id: 0,
+        dishes: [],
+        quantity: [],
+        dishPrice: [],
+        totalPrice: cartTotalPrice,
+        created: {
+          default: new Date().toLocaleDateString(),
+        },
+      };
+
+      const response = await fetch("http://localhost:3001/orderHistory");
+      const result = await response.json();
+
+      order.dish_id = result.length + 1;
+
+      if (currentCart) {
+        currentCart.forEach((item) => {
+          order.dishes.push(item.dishName);
+          order.quantity.push(item.quantity);
+          order.dishPrice.push(item.dishPrice);
+        });
+      }
+
+      await fetch(`http://localhost:3001/orderHistory`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // if (status === "loading") {
   //   return <div>Loading...</div>;
   // }
@@ -79,7 +119,7 @@ export default function CartPage() {
         <p>Total price for cart:</p>
         <p>{cartTotalPrice.toFixed(2)}</p>
 
-        <button>ORDER</button>
+        <button onClick={(event) => submitOrder(event)}>ORDER</button>
       </section>
     </main>
   );

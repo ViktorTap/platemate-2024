@@ -101,7 +101,11 @@ export default function RestaurantPage({ params }: { params: { id: string } }) {
               {visibleDishes.map((dish) => {
                 return (
                   <div key={dish._id} className="dish-container">
-                    <DishCard {...dish} restID={params.id} />
+                    <DishCard
+                      {...dish}
+                      restID={params.id}
+                      restName={rest.name}
+                    />
                   </div>
                 );
               })}
