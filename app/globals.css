@@ -359,7 +359,10 @@ input:focus, input:not([value=""]) {
     text-align: center;
   }
 
-  /* CART */
+/* <----------> */
+/* CART */
+/* <----------> */
+
   .cart-item-container {
     flex-direction: column; 
     align-items: center;
@@ -405,6 +408,108 @@ input:focus, input:not([value=""]) {
     margin-right: 0; 
     width: 100%; 
     margin-top: 1rem; 
+  }
+}
+
+/* <----------> */
+/* ORDER HISTORY */
+/* <----------> */
+
+.single-order-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--border-color-hex);
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Order date styling */
+.order-date {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Container for order details (name, price, quantity) */
+.order-information-container {
+  display: flex;
+  flex-direction: row; /* Stack elements vertically by default */
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Styling for the lists inside order details */
+.order-information-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-information-container p {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.order-information-container li {
+  margin-bottom: 0.5rem;
+}
+
+.price-quantity-container {
+  display: flex;
+  justify-content: space-around;
+  
+  width: 50%;
+}
+/* Total price styling */
+.total-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .order-information-container {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .price-quantity-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .price-orderHistory-container,
+  .quantity-orderHistory-container {
+    flex: 1; /* Make these two containers take up equal space */
+    margin-right: 1rem; /* Add margin between price and quantity */
+  }
+
+  .price-orderHistory-container {
+    margin-right: 0; /* Remove margin for the last item */
+  }
+
+}
+
+@media (max-width: 480px) {
+  .single-order-container {
+    padding: 0.5rem;
+  }
+
+  .order-date {
+    font-size: 1rem;
+  }
+
+  .order-information-container {
+    gap: 1rem;
+  }
+
+  .total-price {
+    font-size: 1.2rem;
   }
 }
 

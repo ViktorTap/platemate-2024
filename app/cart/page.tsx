@@ -11,6 +11,9 @@ import { useState, useEffect } from "react";
 
 import CartCard from "../components/cart/CartCard";
 
+// TEMP
+import OrderHistory from "../components/account/OrderHistory";
+
 export default function CartPage() {
   const { data: session, status } = useSession();
 
@@ -45,9 +48,9 @@ export default function CartPage() {
 
       if (currentCart) {
         currentCart.forEach((item) => {
-          order.dishes.push(item.dishName);
-          order.quantity.push(item.quantity);
-          order.dishPrice.push(item.dishPrice);
+          order.dishes.push(item?.dishName);
+          order.quantity.push(item?.quantity);
+          order.dishPrice.push(item?.dishPrice);
         });
       }
 
@@ -102,10 +105,12 @@ export default function CartPage() {
       {/* <p>Email: {session.user?.email}</p>
       <p>session name: {session.user?.name}</p> */}
 
+      <OrderHistory />
+
       {currentCart.map((item) => {
         return (
           <CartCard
-            key={item.dish_id}
+            key={item?.dish_id}
             cart={item}
             cartTotalPrice={cartTotalPrice}
             setCartTotalPrice={setCartTotalPrice}

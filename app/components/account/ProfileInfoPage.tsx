@@ -13,6 +13,7 @@ interface ProfileIntoPageProps {
 
 export default function ProfileInfoPage({ email }: ProfileIntoPageProps) {
   const [user, setUser] = useState<IUser | null>(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
