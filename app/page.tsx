@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 // Components
 import RestaurantList from "./components/restaurant/RestaurantList";
 import CategoriesBar from "./components/CategoriesBar";
-import SearchBar from "./components/SearchBar";
 
 // Data & Model
 import restaurants from "@/app/data/fake-data";
@@ -33,7 +32,6 @@ export default function Home() {
         allRestaurants={allRestaurants}
         setDisplayRestaurants={setDisplayRestaurants}
       />
-      <SearchBar />
       {displayRestaurants.length > 0 ? (
         <RestaurantList restaurants={displayRestaurants} />
       ) : (

@@ -23,7 +23,7 @@ export default function CategoriesBar({
 
   return (
     <nav className="border-solid border-b-2 border-[#2f8c43]">
-      <ul className="flex flex-wrap gap-y-1 justify-around items-baseline m-5">
+      <ul className="flex flex-wrap gap-2 justify-around items-baseline mt-5">
         <button onClick={() => handleCategorySelectionClick("Hangry Helpers")}>
           Hangry Helpers
         </button>
@@ -33,6 +33,8 @@ export default function CategoriesBar({
         <button onClick={() => handleCategorySelectionClick("Soup-er Stars")}>
           Soup-er Stars
         </button>
+      </ul>
+      <ul className="flex flex-wrap gap-2 justify-around items-baseline mb-5 mt-2">
         <button
           onClick={() => handleCategorySelectionClick("Vegetarian Ventures")}
         >

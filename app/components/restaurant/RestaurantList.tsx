@@ -3,6 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 
 // Model
 import { IRestaurant } from "@/app/data/model/restaurant.model";
+
+// Interface
 interface IRestaurantListProps {
   restaurants: IRestaurant[];
 }

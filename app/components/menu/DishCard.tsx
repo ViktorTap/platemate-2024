@@ -2,10 +2,18 @@
 // Next
 import Image from "next/image";
 
+// React
 import { useState, useEffect } from "react";
 
+// Next-Auth
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+
+// Toastify
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// Interface
 interface IDish {
   _id: string;
   dishName: string;
@@ -14,7 +22,6 @@ interface IDish {
   meal: string;
   image: string;
 }
-
 interface DishCardProps extends IDish {
   restID: string;
   restName: string;
@@ -24,10 +31,16 @@ export default function DishCard(dish: DishCardProps) {
   const { restID, restName, _id, dishName, description, price, meal, image } =
     dish;
 
+  // Session
+  const { data: session, status } = useSession();
+
+  // Current states
   const [currentOrderDishQuantity, setCurrentOrderDishQuantity] = useState(0);
   const [currendDishTotalPrice, setCurrentDishTotalPrice] = useState(
     dish.price * currentOrderDishQuantity
   );
+
+  // Going to ORDER
   const [currentOrderDish, setCurrentOrderDish] = useState({
     dish_id: dish._id,
     dishName: dish.dishName,
@@ -131,28 +144,41 @@ export default function DishCard(dish: DishCardProps) {
           <p className="mt-0.5">
             <strong>{dish.price} €</strong>
           </p>
-          <div className="dish-card-quantity-contaner">
-            <button
-              onClick={() => handleAddOrSubtract("-")}
-              disabled={currentOrderDishQuantity === 0}
-            >
-              -
-            </button>
-            {currentOrderDishQuantity}
-            <button
-              onClick={() => handleAddOrSubtract("+")}
-              disabled={currentOrderDishQuantity === 10}
-            >
-              +
-            </button>
-          </div>
-          <p>{currendDishTotalPrice.toFixed(2)}</p>
-          <button
-            onClick={(event) => addDishToCart(event)}
-            disabled={currentOrderDishQuantity === 0}
-          >
-            ADD
-          </button>
+
+          {status === "authenticated" ? (
+            <>
+              <div className="dish-card-quantity-contaner">
+                <button
+                  onClick={() => handleAddOrSubtract("-")}
+                  disabled={currentOrderDishQuantity === 0}
+                >
+                  -
+                </button>
+                <span className="mx-1.5">{currentOrderDishQuantity}</span>
+                <button
+                  onClick={() => handleAddOrSubtract("+")}
+                  disabled={currentOrderDishQuantity === 10}
+                >
+                  +
+                </button>
+              </div>
+              <p>{currendDishTotalPrice.toFixed(2)}</p>
+              <button
+                onClick={(event) => addDishToCart(event)}
+                disabled={currentOrderDishQuantity === 0}
+              >
+                ADD
+              </button>
+            </>
+          ) : (
+            <p className="italic text-red-600">
+              Please{" "}
+              <Link href="/account" className="font-black">
+                login
+              </Link>{" "}
+              to order
+            </p>
+          )}
         </article>
       </section>
     </>

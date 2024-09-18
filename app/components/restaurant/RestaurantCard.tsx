@@ -20,6 +20,7 @@ export default function RestaurantCard(restaurant: IRestaurant) {
           width={175}
           height={175}
           className="mb-2 rounded-lg"
+          priority={true}
         />
         <p className="mb-2">
           <i>{restaurant.tagline}</i>
