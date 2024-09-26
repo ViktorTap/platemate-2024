@@ -14,6 +14,9 @@ interface Values {
   email: string;
   password: string;
   confirmPassword: string;
+  // added
+  cart: object[];
+  orderHistory: object[];
 }
 
 interface ReturnMessage {
@@ -24,15 +27,17 @@ interface ReturnMessage {
 export const registerUser = async (
   values: Values
 ): Promise<typeof User | ReturnMessage> => {
+  // async connetion to database
   try {
     connectDB();
 
     const existingEmail = await User.findOne({ email: values.email });
 
     if (existingEmail) {
-      console.log("SERVER SIDE Email is already registered");
+      // console
+      console.log("SERVER SIDE >>> Email is already registered");
       return {
-        message: "SERVER SIDE Email is already registered",
+        message: "SERVER SIDE >>> Email is already registered",
         success: false,
       };
     }
@@ -46,13 +51,15 @@ export const registerUser = async (
       phone: values.phone,
       email: values.email,
       password: hashedPassword,
+      // added
+      cart: values.cart,
+      orderHistory: values.orderHistory,
     });
 
     await newUser.save();
 
+    // console
     console.log(newUser);
-
-    redirect("/");
 
     return {
       message: `New user - ${newUser.firstName} is created successfully.`,

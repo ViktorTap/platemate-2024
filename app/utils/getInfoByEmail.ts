@@ -16,7 +16,6 @@ export default async function getInfoByEmail({
   email,
 }: ProfileIntoPageProps): Promise<typeof User | any> {
   try {
-    console.log("TRY SECTION GET INFO BY EMAIL");
     connectDB();
 
     const existingEmail = await User.findOne({ email: email });
@@ -24,6 +23,7 @@ export default async function getInfoByEmail({
     if (!email) {
       throw new Error("Email is not provided");
     }
+
     const user = await User.findOne({ email: email }).lean();
 
     return user;

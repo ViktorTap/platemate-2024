@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 
 import { HiOutlineTrash, HiTrash } from "react-icons/hi";
 
+import { connectDB } from "@/app/data/dbConnector";
+
 interface ICart {
   dish_id: string;
   dishName: string;
@@ -52,22 +54,28 @@ export default function CartCard({
     const newQuantity = cartItemQuantity + 1;
 
     setCartItemQuantity(newQuantity);
-
+    // connect to database etc
     try {
-      const response = await fetch(`http://localhost:3001/cart/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ quantity: newQuantity }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update dish quantity");
-      }
+      connectDB();
+      console.log("Connected to DB");
     } catch (error) {
-      console.error("Error updating dish quantity:", error);
+      console.error(error);
     }
+    // try {
+    //   const response = await fetch(`http://localhost:3001/cart/${id}`, {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ quantity: newQuantity }),
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error("Failed to update dish quantity");
+    //   }
+    // } catch (error) {
+    //   console.error("Error updating dish quantity:", error);
+    // }
   };
 
   // SUBTRACT QUANTITY

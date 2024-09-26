@@ -1,5 +1,4 @@
 "use client";
-// Skeleton with information
 
 import ProfileInfoPage from "@/app/components/account/ProfileInfoPage";
 

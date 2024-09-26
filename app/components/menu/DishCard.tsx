@@ -9,9 +9,12 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
+import { connectDB } from "@/app/data/dbConnector";
+
 // Toastify
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import User from "@/app/data/model/user.model";
 
 // Interface
 interface IDish {
@@ -34,6 +37,7 @@ export default function DishCard(dish: DishCardProps) {
   // Session
   const { data: session, status } = useSession();
 
+  console.log("DishCard ---> session log", session?.user?.email);
   // Current states
   const [currentOrderDishQuantity, setCurrentOrderDishQuantity] = useState(0);
   const [currendDishTotalPrice, setCurrentDishTotalPrice] = useState(
@@ -82,41 +86,51 @@ export default function DishCard(dish: DishCardProps) {
     );
   };
 
-  const addDishToCart = async (event: any) => {
-    event.preventDefault();
+  // const addDishToCart = async (event: any) => {
+  //   event.preventDefault();
 
-    try {
-      const response = await fetch(`http://localhost:3001/cart/${dish._id}`);
-      const dishExists = response.status === 200;
+  //   try {
+  //     // connect to DB
+  //     connectDB();
 
-      if (dishExists) {
-        const json = await response.json();
-        await fetch(`http://localhost:3001/cart/${dish._id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            quantity: json.quantity + currentOrderDishQuantity,
-          }),
-        });
-        someItemAreInYourCart();
-      } else {
-        await fetch("http://localhost:3001/cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentOrderDish),
-        });
-        itemsAddedIntoTheCart();
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  //     // check if dish exist in user's cart
+  //     // const dishExists = await User.findOne({
+  //     //   email: session?.user?.email,
+  //     //   cart: { $elemMatch: { dish_id: dish._id } },
+  //     // }).lean();
 
-    setCurrentOrderDishQuantity(0);
-  };
+  //     if (dishExists) {
+  //       // If dish exists, update the quantity
+  //       const updatedUser = await User.findOneAndUpdate(
+  //         {
+  //           email: session?.user?.email,
+  //           "cart.dish_id": currentOrderDish.dish_id,
+  //         },
+  //         { $inc: { "cart.$.quantity": currentOrderDish.quantity } }, // Increment the quantity by the new order amount
+  //         { new: true, runValidators: true }
+  //       ).lean();
+
+  //       console.log("Dish quantity updated");
+  //       someItemAreInYourCart();
+  //       return updatedUser;
+  //     } else {
+  //       // If dish does not exist, add it to the cart
+  //       const updatedUser = await User.findOneAndUpdate(
+  //         { email: session?.user?.email },
+  //         { $push: { cart: currentOrderDish } }, // Add the new dish to the cart
+  //         { new: true, runValidators: true }
+  //       ).lean();
+
+  //       console.log("Dish added to cart");
+  //       itemsAddedIntoTheCart();
+  //       return updatedUser;
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   setCurrentOrderDishQuantity(0);
+  // };
 
   return (
     <>
@@ -164,7 +178,7 @@ export default function DishCard(dish: DishCardProps) {
               </div>
               <p>{currendDishTotalPrice.toFixed(2)}</p>
               <button
-                onClick={(event) => addDishToCart(event)}
+                // onClick={(event) => addDishToCart(event)}
                 disabled={currentOrderDishQuantity === 0}
               >
                 ADD
@@ -174,7 +188,7 @@ export default function DishCard(dish: DishCardProps) {
             <p className="italic text-red-600">
               Please{" "}
               <Link href="/account" className="font-black">
-                login
+                LOGIN
               </Link>{" "}
               to order
             </p>

@@ -95,8 +95,10 @@ export default function LogInForm() {
                 name="password"
                 type="password"
               />
-              {/* CSS  ! ! ! */}
-              {error && <div className="form-error">{error}</div>}
+
+              {error && (
+                <div className="text-red-600 font-bold mb-5">{error}</div>
+              )}
               <button
                 className="submit-button"
                 type="submit"

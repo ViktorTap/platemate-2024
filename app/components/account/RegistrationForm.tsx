@@ -4,6 +4,13 @@ import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import { registerUser } from "@/app/actions/registration";
 
+// Next Navigation
+import { useRouter } from "next/navigation";
+
+// Toastify
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface CustomTextInputTypes {
   name: string;
   id?: string;
@@ -11,6 +18,7 @@ interface CustomTextInputTypes {
   type: string;
 }
 
+// creating custom text input field
 const CustomTextInput: React.FC<CustomTextInputTypes> = ({
   label,
   ...props
@@ -34,6 +42,8 @@ const CustomTextInput: React.FC<CustomTextInputTypes> = ({
 };
 
 export default function RegistrationForm() {
+  // router to navigate
+  const router = useRouter();
   interface FormValues {
     firstName: string;
     lastName: string;
@@ -42,6 +52,9 @@ export default function RegistrationForm() {
     email: string;
     password: string;
     confirmPassword: string;
+    // added
+    cart: object[];
+    orderHistory: object[];
   }
 
   const getCharacterValidationError = (str: string) => {
@@ -59,6 +72,8 @@ export default function RegistrationForm() {
           email: "",
           password: "",
           confirmPassword: "",
+          cart: [{}],
+          orderHistory: [{}],
         }}
         validateOnMount
         validationSchema={Yup.object({
@@ -95,13 +110,28 @@ export default function RegistrationForm() {
             const res = await registerUser(values);
 
             if (typeof res === "object" && "message" in res) {
+              // console
               console.log(res.message);
+              // toastify
+              setTimeout(() => {
+                toast.success(
+                  `${values.firstName} is registered succesfully.`,
+                  {
+                    autoClose: 5000,
+                  }
+                );
+              }, 500);
+
+              // redirect
+              router.push("/");
             } else {
+              // console
               console.log(
                 "Registration might be successful. Check server logs."
               );
             }
           } catch (error) {
+            // console
             console.error("Error in registration:", error);
           }
 

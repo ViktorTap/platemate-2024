@@ -9,7 +9,7 @@ import NavigationBar from "./components/NavigarionBar";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
 
 // Toastify
-import { Bounce, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +30,15 @@ export default function RootLayout({
           <NavigationBar />
           {children}
         </SessionProviderWrapper>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          rtl={false}
+          draggable
+          theme="light"
+        />
       </body>
     </html>
   );
